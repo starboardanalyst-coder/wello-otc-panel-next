@@ -1,0 +1,431 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-wello-primary: #00F5D4;
+  --color-wello-secondary: #7B61FF;
+  --color-wello-accent: #FF6B9D;
+  --color-dark-900: #0A0A0F;
+  --color-dark-800: #0D0D14;
+  --color-dark-700: #12121A;
+  --color-dark-600: #181820;
+  --color-dark-500: #1E1E28;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-glow: glow 3s ease-in-out infinite alternate;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 20px rgba(0, 245, 212, 0.2); }
+  100% { box-shadow: 0 0 40px rgba(0, 245, 212, 0.4); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+:root {
+  --wello-primary: #00F5D4;
+  --wello-secondary: #7B61FF;
+  --wello-accent: #FF6B9D;
+  --bg-primary: #0A0A0F;
+  --bg-secondary: #12121A;
+  --bg-card: rgba(255, 255, 255, 0.02);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg-primary);
+  color: #fff;
+  min-height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(0, 245, 212, 0.3) 0%, rgba(123, 97, 255, 0.3) 100%);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(0, 245, 212, 0.5) 0%, rgba(123, 97, 255, 0.5) 100%);
+}
+
+/* Premium Glass Effects */
+.glass-ultra {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(40px) saturate(150%);
+  -webkit-backdrop-filter: blur(40px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #00F5D4 0%, #7B61FF 50%, #FF6B9D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-subtle {
+  background: linear-gradient(90deg, #00F5D4 0%, #7B61FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Number Font */
+.font-number {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-feature-settings: 'tnum', 'ss01';
+  letter-spacing: -0.02em;
+}
+
+/* Glow Effects */
+.glow-primary {
+  box-shadow: 
+    0 0 20px rgba(0, 245, 212, 0.15),
+    0 0 40px rgba(0, 245, 212, 0.1),
+    0 0 60px rgba(0, 245, 212, 0.05);
+}
+
+.glow-buy {
+  box-shadow: 
+    0 0 20px rgba(0, 245, 212, 0.25),
+    0 0 40px rgba(0, 245, 212, 0.15),
+    inset 0 0 20px rgba(0, 245, 212, 0.05);
+}
+
+.glow-sell {
+  box-shadow: 
+    0 0 20px rgba(255, 107, 157, 0.25),
+    0 0 40px rgba(255, 107, 157, 0.15),
+    inset 0 0 20px rgba(255, 107, 157, 0.05);
+}
+
+.glow-purple {
+  box-shadow: 
+    0 0 20px rgba(123, 97, 255, 0.25),
+    0 0 40px rgba(123, 97, 255, 0.15);
+}
+
+/* Animated Background */
+.bg-mesh {
+  background: 
+    radial-gradient(ellipse 80% 50% at 20% -20%, rgba(0, 245, 212, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 0%, rgba(123, 97, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 30% at 50% 100%, rgba(255, 107, 157, 0.05) 0%, transparent 50%),
+    linear-gradient(180deg, #0A0A0F 0%, #0D0D14 50%, #0A0A0F 100%);
+}
+
+/* Grid Pattern */
+.bg-grid {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Noise Texture */
+.bg-noise {
+  position: relative;
+}
+
+.bg-noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Animated Gradient Border */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.border-gradient {
+  position: relative;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(var(--angle), #00F5D4, #7B61FF, #FF6B9D, #00F5D4);
+  animation: rotate-gradient 8s linear infinite;
+}
+
+.border-gradient > * {
+  background: #0A0A0F;
+  border-radius: 15px;
+}
+
+@keyframes rotate-gradient {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* Price Pulse Animation */
+@keyframes price-pulse {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+.price-live::after {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #00F5D4 0%, #7B61FF 100%);
+  border-radius: 50%;
+  margin-left: 10px;
+  animation: price-pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
+}
+
+/* Shimmer Effect */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Floating Animation */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Button Styles */
+.btn-primary {
+  background: linear-gradient(135deg, #00F5D4 0%, #00D4AA 100%);
+  color: #0A0A0F;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 10px 30px rgba(0, 245, 212, 0.3),
+    0 0 60px rgba(0, 245, 212, 0.2);
+}
+
+.btn-sell {
+  background: linear-gradient(135deg, #FF6B9D 0%, #FF4777 100%);
+  color: white;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-sell:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 10px 30px rgba(255, 107, 157, 0.3),
+    0 0 60px rgba(255, 107, 157, 0.2);
+}
+
+/* Input Styles */
+.input-premium {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.input-premium:focus {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(0, 245, 212, 0.5);
+  box-shadow: 
+    0 0 0 4px rgba(0, 245, 212, 0.1),
+    0 0 20px rgba(0, 245, 212, 0.1);
+  outline: none;
+}
+
+/* Selection */
+::selection {
+  background: rgba(0, 245, 212, 0.3);
+}
+
+/* Depth Bar Gradients */
+.bar-buy {
+  background: linear-gradient(90deg, rgba(0, 245, 212, 0.1) 0%, rgba(0, 245, 212, 0.4) 100%);
+  border-right: 2px solid rgba(0, 245, 212, 0.8);
+}
+
+.bar-sell {
+  background: linear-gradient(90deg, rgba(255, 107, 157, 0.4) 0%, rgba(255, 107, 157, 0.1) 100%);
+  border-left: 2px solid rgba(255, 107, 157, 0.8);
+}
+
+.bar-buy-best {
+  background: linear-gradient(90deg, rgba(0, 245, 212, 0.2) 0%, rgba(0, 245, 212, 0.6) 100%);
+  border-right: 3px solid #00F5D4;
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.3);
+}
+
+.bar-sell-best {
+  background: linear-gradient(90deg, rgba(255, 107, 157, 0.6) 0%, rgba(255, 107, 157, 0.2) 100%);
+  border-left: 3px solid #FF6B9D;
+  box-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
+}
+
+/* Stat Card */
+.stat-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+/* Trader Card */
+.trader-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trader-card:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border-color: rgba(0, 245, 212, 0.3);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(0, 245, 212, 0.1);
+}
+
+/* Step indicator */
+.step-active {
+  background: linear-gradient(135deg, #00F5D4 0%, #7B61FF 100%);
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.4);
+}
+
+.step-completed {
+  background: linear-gradient(135deg, rgba(0, 245, 212, 0.2) 0%, rgba(123, 97, 255, 0.2) 100%);
+  border: 1px solid rgba(0, 245, 212, 0.3);
+}
+
+/* Toggle Button */
+.toggle-buy.active {
+  background: linear-gradient(135deg, #00F5D4 0%, #00D4AA 100%);
+  color: #0A0A0F;
+  box-shadow: 
+    0 0 30px rgba(0, 245, 212, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.toggle-sell.active {
+  background: linear-gradient(135deg, #FF6B9D 0%, #FF4777 100%);
+  color: white;
+  box-shadow: 
+    0 0 30px rgba(255, 107, 157, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* Drill-down animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out both;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; max-height: 0; transform: translateY(-8px); }
+  to { opacity: 1; max-height: 600px; transform: translateY(0); }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.25s ease-out both;
+  overflow: hidden;
+}
