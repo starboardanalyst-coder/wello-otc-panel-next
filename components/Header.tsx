@@ -1,6 +1,6 @@
 'use client'
 
-import { TrendingUp, BarChart3, ChevronDown, Plus, Building2 } from 'lucide-react'
+import { TrendingUp, BarChart3, ChevronDown, Plus, Building2, ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -27,7 +27,7 @@ export function Header({
   const isMarket = pathname === '/'
 
   return (
-    <header className="h-12 glass-ultra border-b border-white/5 px-6 flex items-center justify-between relative z-50">
+    <header className="h-14 glass-ultra border-b border-white/5 px-6 flex items-center justify-between relative z-50">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition-all duration-300 relative z-10 group">
         <img src="/wello-logo.png" alt="Wello" className="h-7 transition-transform duration-300 group-hover:scale-105" />
@@ -91,6 +91,19 @@ export function Header({
 
       {/* Right - Navigation & Asset */}
       <div className="flex items-center gap-3 relative z-10">
+        {/* P2P Lending Button */}
+        <a
+          href="https://wello-p2p-demo.vercel.app/lender/dashboard"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 border border-emerald-500/30 text-emerald-400 hover:from-emerald-500/30 hover:to-cyan-500/30 hover:border-emerald-500/50"
+        >
+          <span>P2P Lending</span>
+          <ArrowUpRight size={14} />
+        </a>
+
+        <div className="w-px h-6 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
+
         <Link
           href="/register"
           className={`flex items-center gap-1.5 px-4 py-1.5 rounded-xl text-xs font-semibold transition-all duration-300 ${

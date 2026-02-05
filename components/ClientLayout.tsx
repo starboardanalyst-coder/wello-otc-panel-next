@@ -11,7 +11,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <MarketProvider value={{ chartType, timeRange, asset }}>
-      <div className="h-screen flex flex-col bg-[#0A0A0F] overflow-hidden relative">
+      <div className="h-screen flex flex-col bg-[#0A0A0F] relative">
         {/* Global ambient effects */}
         <div className="fixed inset-0 bg-mesh pointer-events-none" />
         <div className="fixed inset-0 bg-grid opacity-30 pointer-events-none" />

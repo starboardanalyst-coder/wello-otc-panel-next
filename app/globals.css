@@ -16,6 +16,28 @@
   --animate-glow: glow 3s ease-in-out infinite alternate;
   --animate-float: float 6s ease-in-out infinite;
   --animate-shimmer: shimmer 3s ease-in-out infinite;
+
+  /* P2P Demo compatible variables */
+  --background: 222 47% 6%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 8%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222 47% 8%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 142 71% 45%;
+  --primary-foreground: 222 47% 6%;
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
+  --accent: 199 89% 48%;
+  --accent-foreground: 222 47% 6%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217 33% 17%;
+  --input: 217 33% 17%;
+  --ring: 142 71% 45%;
+  --radius: 0.75rem;
 }
 
 @keyframes glow {
@@ -57,7 +79,6 @@ body {
   background: var(--bg-primary);
   color: #fff;
   min-height: 100vh;
-  overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -69,7 +90,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: hsl(222 47% 6%);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -102,6 +123,19 @@ body {
   border-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Dashboard Cards - P2P style */
+.dashboard-card {
+  background: linear-gradient(135deg, hsl(222 47% 8%) 0%, hsl(222 47% 6%) 100%);
+  border: 1px solid hsl(217 33% 17%);
+  border-radius: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-card:hover {
+  border-color: hsl(217 33% 25%);
+  box-shadow: 0 0 30px rgba(0, 245, 212, 0.05);
+}
+
 /* Gradient Text */
 .gradient-text {
   background: linear-gradient(135deg, #00F5D4 0%, #7B61FF 50%, #FF6B9D 100%);
@@ -112,6 +146,14 @@ body {
 
 .gradient-text-subtle {
   background: linear-gradient(90deg, #00F5D4 0%, #7B61FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* P2P compatible gradient text */
+.gradient-text-p2p {
+  background: linear-gradient(135deg, hsl(142 71% 45%), hsl(199 89% 48%));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -130,6 +172,14 @@ body {
     0 0 20px rgba(0, 245, 212, 0.15),
     0 0 40px rgba(0, 245, 212, 0.1),
     0 0 60px rgba(0, 245, 212, 0.05);
+}
+
+.glow-green {
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.15), 0 0 60px rgba(34, 197, 94, 0.05);
+}
+
+.glow-blue {
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.15), 0 0 60px rgba(14, 165, 233, 0.05);
 }
 
 .glow-buy {
@@ -169,86 +219,12 @@ body {
   background-size: 60px 60px;
 }
 
-/* Noise Texture */
-.bg-noise {
-  position: relative;
-}
-
-.bg-noise::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Animated Gradient Border */
-@property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-.border-gradient {
-  position: relative;
-  border-radius: 16px;
-  padding: 1px;
-  background: linear-gradient(var(--angle), #00F5D4, #7B61FF, #FF6B9D, #00F5D4);
-  animation: rotate-gradient 8s linear infinite;
-}
-
-.border-gradient > * {
-  background: #0A0A0F;
-  border-radius: 15px;
-}
-
-@keyframes rotate-gradient {
-  to {
-    --angle: 360deg;
-  }
-}
-
-/* Price Pulse Animation */
-@keyframes price-pulse {
-  0%, 100% { 
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% { 
-    opacity: 0.6;
-    transform: scale(1.1);
-  }
-}
-
-.price-live::after {
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: linear-gradient(135deg, #00F5D4 0%, #7B61FF 100%);
-  border-radius: 50%;
-  margin-left: 10px;
-  animation: price-pulse 2s ease-in-out infinite;
-  box-shadow: 0 0 10px rgba(0, 245, 212, 0.5);
-}
-
-/* Shimmer Effect */
-.shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.05) 50%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out infinite;
-}
-
-/* Floating Animation */
-.float {
-  animation: float 6s ease-in-out infinite;
+/* Grid Pattern - P2P style */
+.grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
 }
 
 /* Button Styles */
@@ -293,6 +269,20 @@ body {
   box-shadow: 
     0 10px 30px rgba(255, 107, 157, 0.3),
     0 0 60px rgba(255, 107, 157, 0.2);
+}
+
+/* Secondary/Outline button - P2P style */
+.btn-secondary {
+  background: transparent;
+  border: 1px solid hsl(217 33% 17%);
+  color: hsl(210 40% 98%);
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary:hover {
+  background: hsl(217 33% 17%);
+  border-color: hsl(217 33% 25%);
 }
 
 /* Input Styles */
@@ -373,6 +363,21 @@ body {
     0 0 40px rgba(0, 245, 212, 0.1);
 }
 
+/* Feature card - Dashboard */
+.feature-card {
+  background: linear-gradient(135deg, hsl(222 47% 8%) 0%, hsl(222 47% 6%) 100%);
+  border: 1px solid hsl(217 33% 17%);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  border-color: rgba(0, 245, 212, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 245, 212, 0.05);
+}
+
 /* Step indicator */
 .step-active {
   background: linear-gradient(135deg, #00F5D4 0%, #7B61FF 100%);
@@ -427,5 +432,15 @@ body {
 
 .animate-slideDown {
   animation: slideDown 0.25s ease-out both;
-  overflow: hidden;
+}
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animated-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
 }
