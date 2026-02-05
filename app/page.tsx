@@ -10,6 +10,8 @@ import {
   ExternalLink, Store, Star, Eye, Sparkles, Zap, Shield
 } from 'lucide-react'
 
+import LiquidityDepth from '@/components/LiquidityDepth'
+
 const PriceChart = dynamic(() => import('@/components/PriceChart'), {
   ssr: false,
   loading: () => (
@@ -206,6 +208,9 @@ export default function OTCPage() {
 
         {/* Right Column */}
         <div className="space-y-6">
+          {/* Liquidity Depth */}
+          <LiquidityDepth buyQuotes={mockBuyQuotes} sellQuotes={mockSellQuotes} />
+
           {/* P2P Lending CTA */}
           <div className="card">
             <div className="card-header flex items-center gap-2">
