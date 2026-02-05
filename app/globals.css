@@ -1,446 +1,186 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
-@theme {
-  --color-wello-primary: #00F5D4;
-  --color-wello-secondary: #7B61FF;
-  --color-wello-accent: #FF6B9D;
-  --color-dark-900: #0A0A0F;
-  --color-dark-800: #0D0D14;
-  --color-dark-700: #12121A;
-  --color-dark-600: #181820;
-  --color-dark-500: #1E1E28;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
-  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-glow: glow 3s ease-in-out infinite alternate;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-shimmer: shimmer 3s ease-in-out infinite;
-
-  /* P2P Demo compatible variables */
-  --background: 222 47% 6%;
-  --foreground: 210 40% 98%;
-  --card: 222 47% 8%;
-  --card-foreground: 210 40% 98%;
-  --popover: 222 47% 8%;
-  --popover-foreground: 210 40% 98%;
-  --primary: 142 71% 45%;
-  --primary-foreground: 222 47% 6%;
-  --secondary: 217 33% 17%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217 33% 17%;
-  --muted-foreground: 215 20% 65%;
-  --accent: 199 89% 48%;
-  --accent-foreground: 222 47% 6%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 217 33% 17%;
-  --input: 217 33% 17%;
-  --ring: 142 71% 45%;
-  --radius: 0.75rem;
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 142 71% 45%;
+    --primary-foreground: 222 47% 6%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 199 89% 48%;
+    --accent-foreground: 222 47% 6%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 142 71% 45%;
+    --radius: 0.75rem;
+  }
 }
 
-@keyframes glow {
-  0% { box-shadow: 0 0 20px rgba(0, 245, 212, 0.2); }
-  100% { box-shadow: 0 0 40px rgba(0, 245, 212, 0.4); }
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-:root {
-  --wello-primary: #00F5D4;
-  --wello-secondary: #7B61FF;
-  --wello-accent: #FF6B9D;
-  --bg-primary: #0A0A0F;
-  --bg-secondary: #12121A;
-  --bg-card: rgba(255, 255, 255, 0.02);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 14px;
-}
-
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: var(--bg-primary);
-  color: #fff;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Premium Scrollbar */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
-  height: 6px;
 }
-
 ::-webkit-scrollbar-track {
   background: hsl(222 47% 6%);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(0, 245, 212, 0.3) 0%, rgba(123, 97, 255, 0.3) 100%);
-  border-radius: 10px;
+  background: hsl(217 33% 25%);
+  border-radius: 3px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, rgba(0, 245, 212, 0.5) 0%, rgba(123, 97, 255, 0.5) 100%);
+  background: hsl(217 33% 35%);
 }
 
-/* Premium Glass Effects */
-.glass-ultra {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-  backdrop-filter: blur(40px) saturate(150%);
-  -webkit-backdrop-filter: blur(40px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.glass-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glass-card:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Dashboard Cards - P2P style */
-.dashboard-card {
-  background: linear-gradient(135deg, hsl(222 47% 8%) 0%, hsl(222 47% 6%) 100%);
-  border: 1px solid hsl(217 33% 17%);
-  border-radius: 0.75rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.dashboard-card:hover {
-  border-color: hsl(217 33% 25%);
-  box-shadow: 0 0 30px rgba(0, 245, 212, 0.05);
-}
-
-/* Gradient Text */
+/* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(135deg, #00F5D4 0%, #7B61FF 50%, #FF6B9D 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-text-subtle {
-  background: linear-gradient(90deg, #00F5D4 0%, #7B61FF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* P2P compatible gradient text */
-.gradient-text-p2p {
   background: linear-gradient(135deg, hsl(142 71% 45%), hsl(199 89% 48%));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Number Font */
-.font-number {
-  font-family: 'JetBrains Mono', 'SF Mono', monospace;
-  font-feature-settings: 'tnum', 'ss01';
-  letter-spacing: -0.02em;
-}
-
-/* Glow Effects */
-.glow-primary {
-  box-shadow: 
-    0 0 20px rgba(0, 245, 212, 0.15),
-    0 0 40px rgba(0, 245, 212, 0.1),
-    0 0 60px rgba(0, 245, 212, 0.05);
-}
-
+/* Glow effects */
 .glow-green {
   box-shadow: 0 0 20px rgba(34, 197, 94, 0.15), 0 0 60px rgba(34, 197, 94, 0.05);
 }
-
 .glow-blue {
   box-shadow: 0 0 20px rgba(14, 165, 233, 0.15), 0 0 60px rgba(14, 165, 233, 0.05);
 }
 
-.glow-buy {
-  box-shadow: 
-    0 0 20px rgba(0, 245, 212, 0.25),
-    0 0 40px rgba(0, 245, 212, 0.15),
-    inset 0 0 20px rgba(0, 245, 212, 0.05);
+/* Card styles matching P2P Demo */
+.card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border) / 0.5);
+  border-radius: var(--radius);
 }
 
-.glow-sell {
-  box-shadow: 
-    0 0 20px rgba(255, 107, 157, 0.25),
-    0 0 40px rgba(255, 107, 157, 0.15),
-    inset 0 0 20px rgba(255, 107, 157, 0.05);
+.card-content {
+  padding: 1.25rem;
 }
 
-.glow-purple {
-  box-shadow: 
-    0 0 20px rgba(123, 97, 255, 0.25),
-    0 0 40px rgba(123, 97, 255, 0.15);
+.card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid hsl(var(--border) / 0.5);
 }
 
-/* Animated Background */
-.bg-mesh {
-  background: 
-    radial-gradient(ellipse 80% 50% at 20% -20%, rgba(0, 245, 212, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 80% 0%, rgba(123, 97, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 30% at 50% 100%, rgba(255, 107, 157, 0.05) 0%, transparent 50%),
-    linear-gradient(180deg, #0A0A0F 0%, #0D0D14 50%, #0A0A0F 100%);
-}
-
-/* Grid Pattern */
-.bg-grid {
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
-/* Grid Pattern - P2P style */
-.grid-pattern {
-  background-image: 
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
-
-/* Button Styles */
-.btn-primary {
-  background: linear-gradient(135deg, #00F5D4 0%, #00D4AA 100%);
-  color: #0A0A0F;
-  font-weight: 700;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
-  transform: translateX(-100%);
-  transition: transform 0.5s ease;
-}
-
-.btn-primary:hover::before {
-  transform: translateX(100%);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 
-    0 10px 30px rgba(0, 245, 212, 0.3),
-    0 0 60px rgba(0, 245, 212, 0.2);
-}
-
-.btn-sell {
-  background: linear-gradient(135deg, #FF6B9D 0%, #FF4777 100%);
-  color: white;
-  font-weight: 700;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.btn-sell:hover {
-  transform: translateY(-2px);
-  box-shadow: 
-    0 10px 30px rgba(255, 107, 157, 0.3),
-    0 0 60px rgba(255, 107, 157, 0.2);
-}
-
-/* Secondary/Outline button - P2P style */
-.btn-secondary {
-  background: transparent;
-  border: 1px solid hsl(217 33% 17%);
-  color: hsl(210 40% 98%);
+/* Button styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s;
+  cursor: pointer;
 }
 
+.btn-primary {
+  background-color: hsl(142 71% 45%);
+  color: hsl(var(--primary-foreground));
+  padding: 0.625rem 1rem;
+}
+.btn-primary:hover {
+  background-color: hsl(142 71% 40%);
+}
+
+.btn-secondary {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  padding: 0.625rem 1rem;
+}
 .btn-secondary:hover {
-  background: hsl(217 33% 17%);
-  border-color: hsl(217 33% 25%);
+  background-color: hsl(217 33% 22%);
 }
 
-/* Input Styles */
-.input-premium {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.3s ease;
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid hsl(var(--border) / 0.5);
+  color: hsl(var(--foreground));
+  padding: 0.625rem 1rem;
+}
+.btn-outline:hover {
+  background-color: hsl(var(--secondary));
 }
 
-.input-premium:focus {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(0, 245, 212, 0.5);
-  box-shadow: 
-    0 0 0 4px rgba(0, 245, 212, 0.1),
-    0 0 20px rgba(0, 245, 212, 0.1);
-  outline: none;
+.btn-ghost {
+  background-color: transparent;
+  color: hsl(var(--muted-foreground));
+  padding: 0.5rem;
+}
+.btn-ghost:hover {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--foreground));
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.badge-default {
+  background-color: hsl(var(--primary) / 0.2);
+  color: hsl(var(--primary));
+}
+.badge-secondary {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+/* Text colors */
+.text-muted {
+  color: hsl(var(--muted-foreground));
+}
+.text-primary {
+  color: hsl(var(--primary));
+}
+.text-destructive {
+  color: hsl(var(--destructive));
+}
+
+/* Background colors */
+.bg-card {
+  background-color: hsl(var(--card));
+}
+.bg-secondary {
+  background-color: hsl(var(--secondary));
+}
+
+/* Border colors */
+.border-border {
+  border-color: hsl(var(--border));
 }
 
 /* Selection */
 ::selection {
-  background: rgba(0, 245, 212, 0.3);
-}
-
-/* Depth Bar Gradients */
-.bar-buy {
-  background: linear-gradient(90deg, rgba(0, 245, 212, 0.1) 0%, rgba(0, 245, 212, 0.4) 100%);
-  border-right: 2px solid rgba(0, 245, 212, 0.8);
-}
-
-.bar-sell {
-  background: linear-gradient(90deg, rgba(255, 107, 157, 0.4) 0%, rgba(255, 107, 157, 0.1) 100%);
-  border-left: 2px solid rgba(255, 107, 157, 0.8);
-}
-
-.bar-buy-best {
-  background: linear-gradient(90deg, rgba(0, 245, 212, 0.2) 0%, rgba(0, 245, 212, 0.6) 100%);
-  border-right: 3px solid #00F5D4;
-  box-shadow: 0 0 20px rgba(0, 245, 212, 0.3);
-}
-
-.bar-sell-best {
-  background: linear-gradient(90deg, rgba(255, 107, 157, 0.6) 0%, rgba(255, 107, 157, 0.2) 100%);
-  border-left: 3px solid #FF6B9D;
-  box-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
-}
-
-/* Stat Card */
-.stat-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  position: relative;
-  overflow: hidden;
-}
-
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-}
-
-/* Trader Card */
-.trader-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.trader-card:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
-  border-color: rgba(0, 245, 212, 0.3);
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    0 0 40px rgba(0, 245, 212, 0.1);
-}
-
-/* Feature card - Dashboard */
-.feature-card {
-  background: linear-gradient(135deg, hsl(222 47% 8%) 0%, hsl(222 47% 6%) 100%);
-  border: 1px solid hsl(217 33% 17%);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-.feature-card:hover {
-  border-color: rgba(0, 245, 212, 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 245, 212, 0.05);
-}
-
-/* Step indicator */
-.step-active {
-  background: linear-gradient(135deg, #00F5D4 0%, #7B61FF 100%);
-  box-shadow: 0 0 20px rgba(0, 245, 212, 0.4);
-}
-
-.step-completed {
-  background: linear-gradient(135deg, rgba(0, 245, 212, 0.2) 0%, rgba(123, 97, 255, 0.2) 100%);
-  border: 1px solid rgba(0, 245, 212, 0.3);
-}
-
-/* Toggle Button */
-.toggle-buy.active {
-  background: linear-gradient(135deg, #00F5D4 0%, #00D4AA 100%);
-  color: #0A0A0F;
-  box-shadow: 
-    0 0 30px rgba(0, 245, 212, 0.4),
-    inset 0 0 20px rgba(255, 255, 255, 0.1);
-}
-
-.toggle-sell.active {
-  background: linear-gradient(135deg, #FF6B9D 0%, #FF4777 100%);
-  color: white;
-  box-shadow: 
-    0 0 30px rgba(255, 107, 157, 0.4),
-    inset 0 0 20px rgba(255, 255, 255, 0.1);
-}
-
-/* Drill-down animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.2s ease-out;
-}
-
-.animate-slideUp {
-  animation: slideUp 0.3s ease-out both;
-}
-
-@keyframes slideDown {
-  from { opacity: 0; max-height: 0; transform: translateY(-8px); }
-  to { opacity: 1; max-height: 600px; transform: translateY(0); }
-}
-
-.animate-slideDown {
-  animation: slideDown 0.25s ease-out both;
-}
-
-/* Animated gradient background */
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-.animated-gradient {
-  background-size: 200% 200%;
-  animation: gradient-shift 8s ease infinite;
+  background: hsl(var(--primary) / 0.3);
 }

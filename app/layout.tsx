@@ -1,13 +1,10 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { ClientLayout } from '@/components/ClientLayout'
+import Navbar from '@/components/Navbar'
 
 export const metadata: Metadata = {
   title: 'Wello OTC Desk',
   description: 'Institutional OTC Trading Platform',
-  openGraph: {
-    images: ['/wello-og.png'],
-  },
 }
 
 export default function RootLayout({
@@ -16,9 +13,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>
-        <ClientLayout>{children}</ClientLayout>
+    <html lang="en" className="dark">
+      <body className="min-h-screen antialiased">
+        <Navbar />
+        <main>{children}</main>
       </body>
     </html>
   )
