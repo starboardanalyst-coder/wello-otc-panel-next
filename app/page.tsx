@@ -5,16 +5,16 @@ import { mockPriceData, mockSellQuotes, mockBuyQuotes } from '@/data/mockData'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { 
-  ArrowRight, ArrowUpRight, Shield, Zap, TrendingUp, TrendingDown, 
+  ArrowUpRight, ArrowDownRight, Shield, Zap, TrendingUp, TrendingDown, 
   Clock, Users, BarChart3, LineChart, X, Wallet, DollarSign,
-  ExternalLink, Store, Star
+  ExternalLink, Store, Star, Eye, Plus, Sparkles
 } from 'lucide-react'
 
 const MiniChart = dynamic(() => import('@/components/MiniChart'), {
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="text-white/30 text-sm">Loading chart...</div>
+      <div className="text-zinc-500 text-sm">Loading chart...</div>
     </div>
   ),
 })
@@ -44,177 +44,158 @@ export default function OTCPage() {
   }
 
   return (
-    <main className="flex-1 overflow-auto">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold sm:text-4xl">
-            <span className="gradient-text">USDT/USD</span> OTC Trading
-          </h1>
-          <p className="mt-2 text-lg text-white/50">
-            Institutional-grade liquidity · Instant settlement · Zero counterparty risk
-          </p>
-        </div>
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold sm:text-3xl">
+          Welcome to <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">OTC Trading</span>
+        </h1>
+        <p className="mt-1 text-zinc-400">Institutional-grade USDT/USD liquidity · Instant settlement</p>
+      </div>
 
-        {/* Top Stats Cards */}
-        <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Current Price */}
-          <div className="glass-card rounded-2xl p-5 bg-gradient-to-br from-[#00F5D4]/10 to-transparent border border-[#00F5D4]/20">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-white/50">Current Price</span>
-              <DollarSign className="h-4 w-4 text-[#00F5D4]" />
-            </div>
-            <div className="mt-2 text-3xl font-bold font-number">${currentPrice.toFixed(4)}</div>
-            <div className={`mt-1 flex items-center gap-1 text-sm ${isUp ? 'text-emerald-400' : 'text-rose-400'}`}>
-              {isUp ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
-              {isUp ? '+' : ''}{priceChange.toFixed(2)}% today
-            </div>
+      {/* Top Cards Row */}
+      <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Current Price */}
+        <div className="rounded-xl border border-zinc-800 bg-gradient-to-br from-emerald-500/10 to-transparent p-5 shadow-lg shadow-emerald-500/5">
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-zinc-400">Current Price</span>
+            <DollarSign className="h-4 w-4 text-emerald-400" />
           </div>
-
-          {/* Best Bid */}
-          <div className="glass-card rounded-2xl p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-white/50">Best Bid</span>
-              <TrendingUp className="h-4 w-4 text-emerald-400" />
-            </div>
-            <div className="mt-2 text-3xl font-bold font-number text-emerald-400">${bestBid.toFixed(4)}</div>
-            <div className="mt-1 text-sm text-white/40">{formatVol(totalBidVol)} depth</div>
-          </div>
-
-          {/* Best Ask */}
-          <div className="glass-card rounded-2xl p-5">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-white/50">Best Ask</span>
-              <TrendingDown className="h-4 w-4 text-rose-400" />
-            </div>
-            <div className="mt-2 text-3xl font-bold font-number text-rose-400">${bestAsk.toFixed(4)}</div>
-            <div className="mt-1 text-sm text-white/40">{formatVol(totalAskVol)} depth</div>
-          </div>
-
-          {/* 24h Volume */}
-          <div className="glass-card rounded-2xl p-5 bg-gradient-to-br from-[#7B61FF]/10 to-transparent border border-[#7B61FF]/20">
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-white/50">24h Volume</span>
-              <BarChart3 className="h-4 w-4 text-[#7B61FF]" />
-            </div>
-            <div className="mt-2 text-3xl font-bold font-number">$47.2M</div>
-            <div className="mt-1 flex items-center gap-1 text-sm text-[#7B61FF]">
-              <Users className="h-3 w-3" /> 156 active traders
-            </div>
+          <div className="mt-2 text-2xl font-bold">${currentPrice.toFixed(4)}</div>
+          <div className={`mt-1 flex items-center gap-1 text-xs ${isUp ? 'text-emerald-400' : 'text-red-400'}`}>
+            {isUp ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
+            {isUp ? '+' : ''}{priceChange.toFixed(2)}% today
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="mb-8 flex flex-wrap gap-3">
-          <Link href="/register">
-            <button className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#00F5D4] text-black font-bold hover:bg-[#00F5D4]/90 transition-colors">
-              <ArrowUpRight className="h-5 w-5" /> Start Trading
-            </button>
-          </Link>
-          <Link href="/kyb">
-            <button className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass-card border border-white/10 hover:border-[#7B61FF]/50 font-semibold transition-colors">
-              <Shield className="h-5 w-5 text-[#7B61FF]" /> KYB Verification
-            </button>
-          </Link>
-          <button
-            onClick={() => setShowChart(true)}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass-card border border-white/10 hover:border-[#00F5D4]/50 font-semibold transition-colors"
-          >
-            <LineChart className="h-5 w-5 text-[#00F5D4]" /> View Chart
+        {/* Best Bid */}
+        <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5">
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-zinc-400">Best Bid</span>
+            <TrendingUp className="h-4 w-4 text-emerald-400" />
+          </div>
+          <div className="mt-2 text-2xl font-bold text-emerald-400">${bestBid.toFixed(4)}</div>
+          <div className="mt-1 text-xs text-zinc-500">{formatVol(totalBidVol)} depth</div>
+        </div>
+
+        {/* Best Ask */}
+        <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5">
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-zinc-400">Best Ask</span>
+            <TrendingDown className="h-4 w-4 text-red-400" />
+          </div>
+          <div className="mt-2 text-2xl font-bold text-red-400">${bestAsk.toFixed(4)}</div>
+          <div className="mt-1 text-xs text-zinc-500">{formatVol(totalAskVol)} depth</div>
+        </div>
+
+        {/* 24h Volume */}
+        <div className="rounded-xl border border-zinc-800 bg-gradient-to-br from-cyan-500/10 to-transparent p-5 shadow-lg shadow-cyan-500/5">
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-zinc-400">24h Volume</span>
+            <BarChart3 className="h-4 w-4 text-cyan-400" />
+          </div>
+          <div className="mt-2 text-2xl font-bold">$47.2M</div>
+          <div className="mt-1 flex items-center gap-1 text-xs text-cyan-400">
+            <Users className="h-3 w-3" /> 156 active traders
+          </div>
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="mb-8 flex flex-wrap gap-3">
+        <Link href="/register">
+          <button className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700 transition-colors">
+            <ArrowUpRight className="h-4 w-4" /> Start Trading
           </button>
-          <Link href="https://wello-p2p-demo.vercel.app/market" target="_blank">
-            <button className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass-card border border-white/10 hover:border-white/20 font-semibold transition-colors">
-              <Store className="h-5 w-5" /> Browse Market
-            </button>
-          </Link>
-        </div>
+        </Link>
+        <Link href="/kyb">
+          <button className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-2.5 text-sm font-semibold text-zinc-200 hover:bg-zinc-800 transition-colors">
+            <Shield className="h-4 w-4" /> KYB Verification
+          </button>
+        </Link>
+        <button
+          onClick={() => setShowChart(true)}
+          className="inline-flex items-center gap-2 rounded-lg border border-emerald-500/30 bg-transparent px-4 py-2.5 text-sm font-semibold text-emerald-400 hover:bg-emerald-500/10 transition-colors"
+        >
+          <LineChart className="h-4 w-4" /> View Chart
+        </button>
+        <Link href="https://wello-p2p-demo.vercel.app/market" target="_blank">
+          <button className="inline-flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-2.5 text-sm font-semibold text-zinc-200 hover:bg-zinc-800 transition-colors">
+            <Store className="h-4 w-4" /> Browse Market
+          </button>
+        </Link>
+      </div>
 
-        {/* Main Grid */}
-        <div className="grid gap-6 lg:grid-cols-3">
-          {/* Left: Features + Traders */}
-          <div className="space-y-6 lg:col-span-2">
-            {/* Platform Features */}
-            <div className="glass-card rounded-2xl p-6">
-              <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-                <Zap className="h-5 w-5 text-[#00F5D4]" />
-                Platform Features
-              </h2>
-              <div className="grid sm:grid-cols-3 gap-4">
-                <div className="rounded-xl bg-white/[0.03] border border-white/5 p-4 hover:border-[#00F5D4]/30 transition-colors">
-                  <div className="w-10 h-10 rounded-lg bg-[#00F5D4]/10 flex items-center justify-center mb-3">
-                    <Zap className="h-5 w-5 text-[#00F5D4]" />
-                  </div>
-                  <h3 className="font-semibold mb-1">Instant Settlement</h3>
-                  <p className="text-sm text-white/40">Atomic swaps with smart contract escrow</p>
-                </div>
-                <div className="rounded-xl bg-white/[0.03] border border-white/5 p-4 hover:border-[#7B61FF]/30 transition-colors">
-                  <div className="w-10 h-10 rounded-lg bg-[#7B61FF]/10 flex items-center justify-center mb-3">
-                    <BarChart3 className="h-5 w-5 text-[#7B61FF]" />
-                  </div>
-                  <h3 className="font-semibold mb-1">Deep Liquidity</h3>
-                  <p className="text-sm text-white/40">Tight spreads for institutional volumes</p>
-                </div>
-                <div className="rounded-xl bg-white/[0.03] border border-white/5 p-4 hover:border-[#FF6B9D]/30 transition-colors">
-                  <div className="w-10 h-10 rounded-lg bg-[#FF6B9D]/10 flex items-center justify-center mb-3">
-                    <Shield className="h-5 w-5 text-[#FF6B9D]" />
-                  </div>
-                  <h3 className="font-semibold mb-1">Secure Escrow</h3>
-                  <p className="text-sm text-white/40">Multi-sig custody & audited contracts</p>
-                </div>
+      {/* Main Grid */}
+      <div className="grid gap-6 lg:grid-cols-3">
+        {/* Left Column */}
+        <div className="space-y-6 lg:col-span-2">
+          {/* Price Chart Card */}
+          <div className="rounded-xl border border-zinc-800 bg-zinc-900/50">
+            <div className="flex items-center justify-between border-b border-zinc-800 px-5 py-4">
+              <div className="flex items-center gap-2">
+                <LineChart className="h-4 w-4 text-emerald-400" />
+                <h2 className="font-semibold">Price Chart (7D)</h2>
               </div>
+              <span className="rounded-full bg-zinc-800 px-2.5 py-1 text-xs text-zinc-400">
+                Spread: {spread.toFixed(3)}%
+              </span>
             </div>
+            <div className="h-[280px] p-4">
+              <MiniChart
+                data={mockPriceData}
+                currentPrice={currentPrice}
+                sellQuotes={mockSellQuotes}
+                buyQuotes={mockBuyQuotes}
+                compact
+              />
+            </div>
+          </div>
 
-            {/* Top Traders */}
-            <div className="glass-card rounded-2xl p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-bold flex items-center gap-2">
-                  <Users className="h-5 w-5 text-[#7B61FF]" />
-                  Top Liquidity Providers
-                </h2>
-                <span className="text-xs text-white/40 px-2 py-1 rounded-full bg-white/5">Last 24h</span>
-              </div>
+          {/* Top Traders Table */}
+          <div className="rounded-xl border border-zinc-800 bg-zinc-900/50">
+            <div className="border-b border-zinc-800 px-5 py-4">
+              <h2 className="font-semibold">Top Liquidity Providers</h2>
+            </div>
+            <div className="p-5">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-white/5 text-xs text-white/40">
+                    <tr className="border-b border-zinc-800 text-xs text-zinc-500">
                       <th className="pb-3 text-left font-medium">Rank</th>
                       <th className="pb-3 text-left font-medium">Trader</th>
                       <th className="pb-3 text-right font-medium">Completion</th>
                       <th className="pb-3 text-right font-medium">Response</th>
                       <th className="pb-3 text-right font-medium">Volume</th>
+                      <th className="pb-3 text-center font-medium">Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     {topTraders.map((trader, i) => (
-                      <tr key={trader.id} className="border-b border-white/5 last:border-0 hover:bg-white/[0.02] transition-colors">
-                        <td className="py-4">
-                          <span className={`inline-flex items-center justify-center w-7 h-7 rounded-lg text-xs font-bold ${
+                      <tr key={trader.id} className="border-b border-zinc-800/50 hover:bg-zinc-800/30">
+                        <td className="py-3">
+                          <span className={`inline-flex h-6 w-6 items-center justify-center rounded text-xs font-bold ${
                             i === 0 ? 'bg-yellow-500/20 text-yellow-400' :
-                            i === 1 ? 'bg-gray-400/20 text-gray-300' :
+                            i === 1 ? 'bg-zinc-500/20 text-zinc-300' :
                             i === 2 ? 'bg-orange-500/20 text-orange-400' :
-                            'bg-white/5 text-white/40'
+                            'bg-zinc-800 text-zinc-500'
                           }`}>
                             {i + 1}
                           </span>
                         </td>
-                        <td className="py-4 font-medium">{trader.trader}</td>
-                        <td className="py-4 text-right">
-                          <div className="flex items-center justify-end gap-2">
-                            <div className="w-16 h-2 bg-white/10 rounded-full overflow-hidden">
-                              <div 
-                                className="h-full bg-emerald-400 rounded-full" 
-                                style={{ width: `${trader.completionRate}%` }} 
-                              />
-                            </div>
-                            <span className="text-white/60">{trader.completionRate}%</span>
-                          </div>
-                        </td>
-                        <td className="py-4 text-right text-white/60">
+                        <td className="py-3 font-medium">{trader.trader}</td>
+                        <td className="py-3 text-right text-emerald-400">{trader.completionRate}%</td>
+                        <td className="py-3 text-right text-zinc-400">
                           <span className="flex items-center justify-end gap-1">
                             <Clock className="h-3 w-3" /> {trader.responseTime}
                           </span>
                         </td>
-                        <td className="py-4 text-right font-bold font-number">{formatVol(trader.volume)}</td>
+                        <td className="py-3 text-right font-medium">{formatVol(trader.volume)}</td>
+                        <td className="py-3 text-center">
+                          <button className="inline-flex items-center gap-1 rounded bg-zinc-800 px-2 py-1 text-xs text-zinc-300 hover:bg-zinc-700">
+                            <Eye className="h-3 w-3" /> View
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -222,84 +203,94 @@ export default function OTCPage() {
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Right: P2P Lending CTA */}
-          <div className="space-y-6">
-            {/* P2P Lending - BIG CTA */}
-            <div className="glass-card rounded-2xl p-6 bg-gradient-to-br from-emerald-500/10 to-transparent border border-emerald-500/30">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center">
-                  <Star className="h-6 w-6 text-emerald-400" />
-                </div>
-                <div>
-                  <div className="text-sm text-emerald-400 font-medium">P2P Lending</div>
-                  <div className="text-xl font-bold">Earn 15-36% APY</div>
-                </div>
+        {/* Right Column */}
+        <div className="space-y-6">
+          {/* P2P Lending CTA */}
+          <div className="rounded-xl border border-zinc-800 bg-zinc-900/50">
+            <div className="border-b border-zinc-800 px-5 py-4">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-amber-400" />
+                <h2 className="font-semibold">P2P Lending</h2>
               </div>
-              
-              <p className="text-white/50 mb-6">
-                Lend to verified borrowers in emerging markets. AI-matched counterparties with institutional-grade risk controls.
-              </p>
-
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center gap-3 text-sm">
-                  <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                    <span className="text-emerald-400 text-xs">✓</span>
-                  </div>
-                  <span className="text-white/70">KYB-verified borrowers only</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm">
-                  <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                    <span className="text-emerald-400 text-xs">✓</span>
-                  </div>
-                  <span className="text-white/70">8-layer risk control system</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm">
-                  <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                    <span className="text-emerald-400 text-xs">✓</span>
-                  </div>
-                  <span className="text-white/70">Smart contract escrow</span>
-                </div>
-              </div>
-
-              <a
-                href="https://wello-p2p-demo.vercel.app/lender/dashboard"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-emerald-500 text-black font-bold text-lg hover:bg-emerald-400 transition-colors"
-              >
-                Explore P2P Lending
-                <ExternalLink className="h-5 w-5" />
-              </a>
             </div>
-
-            {/* Market Status */}
-            <div className="glass-card rounded-2xl p-6">
-              <h3 className="text-sm font-bold text-white/60 uppercase tracking-wider mb-4">Market Status</h3>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-white/50">OTC Desk</span>
-                  <span className="flex items-center gap-2 font-medium text-emerald-400">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    Online
+            <div className="space-y-4 p-5">
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4">
+                <div className="mb-2 flex items-center justify-between">
+                  <span className="font-medium">Earn Yield</span>
+                  <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-xs font-semibold text-emerald-400">
+                    15-36% APY
                   </span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-white/50">Settlement</span>
-                  <span className="font-medium">Instant</span>
+                <p className="mb-4 text-xs text-zinc-400">
+                  Lend to verified borrowers in emerging markets with AI-matched counterparties.
+                </p>
+                <div className="mb-4 space-y-2 text-xs text-zinc-400">
+                  <div className="flex items-center gap-2">
+                    <span className="text-emerald-400">✓</span> KYB-verified borrowers
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-emerald-400">✓</span> 8-layer risk control
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-emerald-400">✓</span> Smart contract escrow
+                  </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-white/50">Spread</span>
-                  <span className="font-medium font-number text-[#00F5D4]">{spread.toFixed(3)}%</span>
+                <a
+                  href="https://wello-p2p-demo.vercel.app/lender/dashboard"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 py-2.5 text-sm font-semibold text-white hover:bg-emerald-700"
+                >
+                  Explore Lending <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
+
+              <div className="rounded-xl border border-cyan-500/30 bg-cyan-500/5 p-4">
+                <div className="mb-2 flex items-center justify-between">
+                  <span className="font-medium">Need Capital?</span>
+                  <span className="rounded-full bg-cyan-500/20 px-2 py-0.5 text-xs font-semibold text-cyan-400">
+                    Borrow
+                  </span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-white/50">Min Trade</span>
-                  <span className="font-medium font-number">$1,000</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-white/50">Max Trade</span>
-                  <span className="font-medium font-number">$10M</span>
-                </div>
+                <p className="mb-4 text-xs text-zinc-400">
+                  Get matched with lenders for your business needs.
+                </p>
+                <a
+                  href="https://wello-p2p-demo.vercel.app/borrower/dashboard"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg border border-cyan-500/30 py-2.5 text-sm font-semibold text-cyan-400 hover:bg-cyan-500/10"
+                >
+                  Apply Now <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Market Info */}
+          <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500">Market Status</h3>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-zinc-400">OTC Desk</span>
+                <span className="flex items-center gap-1.5 text-sm font-medium text-emerald-400">
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+                  Online
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-zinc-400">Settlement</span>
+                <span className="text-sm font-medium">Instant</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-zinc-400">Min Trade</span>
+                <span className="text-sm font-medium">$1,000</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-zinc-400">Max Trade</span>
+                <span className="text-sm font-medium">$10,000,000</span>
               </div>
             </div>
           </div>
@@ -313,22 +304,27 @@ export default function OTCPage() {
             className="absolute inset-0 bg-black/80 backdrop-blur-sm"
             onClick={() => setShowChart(false)}
           />
-          <div className="relative w-full max-w-5xl h-[550px] glass-card rounded-2xl overflow-hidden border border-white/10">
-            <button
-              onClick={() => setShowChart(false)}
-              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-colors"
-            >
-              <X className="h-5 w-5" />
-            </button>
-            <MiniChart
-              data={mockPriceData}
-              currentPrice={currentPrice}
-              sellQuotes={mockSellQuotes}
-              buyQuotes={mockBuyQuotes}
-            />
+          <div className="relative w-full max-w-5xl rounded-xl border border-zinc-800 bg-zinc-900 overflow-hidden">
+            <div className="flex items-center justify-between border-b border-zinc-800 px-5 py-4">
+              <h2 className="font-semibold">USDT/USD Price Chart</h2>
+              <button
+                onClick={() => setShowChart(false)}
+                className="rounded-lg p-2 text-zinc-400 hover:bg-zinc-800 hover:text-white"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="h-[500px]">
+              <MiniChart
+                data={mockPriceData}
+                currentPrice={currentPrice}
+                sellQuotes={mockSellQuotes}
+                buyQuotes={mockBuyQuotes}
+              />
+            </div>
           </div>
         </div>
       )}
-    </main>
+    </div>
   )
 }

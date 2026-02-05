@@ -11,6 +11,7 @@ interface MiniChartProps {
   currentPrice: number
   sellQuotes: Quote[]
   buyQuotes: Quote[]
+  compact?: boolean
 }
 
 export default function MiniChart({
@@ -18,6 +19,7 @@ export default function MiniChart({
   currentPrice,
   sellQuotes,
   buyQuotes,
+  compact = false,
 }: MiniChartProps) {
   const chartContainerRef = useRef<HTMLDivElement>(null)
   const chartRef = useRef<IChartApi | null>(null)
@@ -34,50 +36,46 @@ export default function MiniChart({
     return `$${v}`
   }
 
-  const maxVolume = Math.max(totalBidVolume, totalAskVolume)
-  const bidWidth = (totalBidVolume / maxVolume) * 100
-  const askWidth = (totalAskVolume / maxVolume) * 100
-
   useEffect(() => {
     if (!chartContainerRef.current) return
 
     const chart = createChart(chartContainerRef.current, {
       layout: {
         background: { color: 'transparent' },
-        textColor: 'rgba(255, 255, 255, 0.4)',
+        textColor: '#71717a',
         fontSize: 10,
-        fontFamily: "'JetBrains Mono', monospace",
+        fontFamily: 'system-ui, -apple-system, sans-serif',
       },
       grid: {
-        vertLines: { color: 'rgba(255, 255, 255, 0.03)' },
-        horzLines: { color: 'rgba(255, 255, 255, 0.03)' },
+        vertLines: { color: 'rgba(113, 113, 122, 0.1)' },
+        horzLines: { color: 'rgba(113, 113, 122, 0.1)' },
       },
       rightPriceScale: { 
-        visible: true,
+        visible: !compact,
         borderVisible: false,
       },
       leftPriceScale: { visible: false },
       timeScale: { 
-        visible: true,
+        visible: !compact,
         borderVisible: false,
         timeVisible: true,
       },
       crosshair: {
-        vertLine: { color: 'rgba(0, 245, 212, 0.3)', width: 1 },
-        horzLine: { color: 'rgba(0, 245, 212, 0.3)', width: 1 },
+        vertLine: { color: 'rgba(16, 185, 129, 0.3)', width: 1 },
+        horzLine: { color: 'rgba(16, 185, 129, 0.3)', width: 1 },
       },
     })
 
     chartRef.current = chart
 
     const series = chart.addSeries(LineSeries, {
-      color: '#00F5D4',
+      color: '#10b981',
       lineWidth: 2,
       crosshairMarkerVisible: true,
       crosshairMarkerRadius: 4,
-      priceLineVisible: true,
-      priceLineColor: '#00F5D4',
-      lastValueVisible: true,
+      priceLineVisible: !compact,
+      priceLineColor: '#10b981',
+      lastValueVisible: !compact,
     })
 
     series.setData(data.map(d => ({ 
@@ -103,86 +101,93 @@ export default function MiniChart({
       window.removeEventListener('resize', handleResize)
       chart.remove()
     }
-  }, [data])
+  }, [data, compact])
 
+  // Compact mode - just the chart
+  if (compact) {
+    return (
+      <div className="h-full w-full">
+        <div ref={chartContainerRef} className="h-full w-full" />
+      </div>
+    )
+  }
+
+  // Full mode with liquidity panel
   return (
-    <div className="h-full flex flex-col lg:flex-row">
+    <div className="flex h-full flex-col lg:flex-row">
       {/* Chart Area */}
-      <div className="flex-1 flex flex-col min-h-0">
-        {/* Header */}
-        <div className="p-4 border-b border-white/5 flex items-center justify-between">
+      <div className="flex min-h-0 flex-1 flex-col">
+        <div className="flex items-center justify-between border-b border-zinc-800 p-4">
           <div>
-            <div className="text-xs text-white/40 uppercase tracking-wider mb-1">USDT/USD Price Chart</div>
+            <div className="mb-1 text-xs uppercase tracking-wider text-zinc-500">USDT/USD</div>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-black font-number text-white">${currentPrice.toFixed(4)}</span>
+              <span className="text-2xl font-bold">${currentPrice.toFixed(4)}</span>
             </div>
           </div>
           <div className="text-right">
-            <div className="text-xs text-white/40">24h Range</div>
-            <div className="text-sm font-number text-white/60">$0.9985 - $1.0125</div>
+            <div className="text-xs text-zinc-500">24h Range</div>
+            <div className="text-sm text-zinc-400">$0.9985 - $1.0125</div>
           </div>
         </div>
-
-        {/* Chart */}
-        <div className="flex-1 min-h-0 p-2">
-          <div ref={chartContainerRef} className="w-full h-full" />
+        <div className="min-h-0 flex-1 p-2">
+          <div ref={chartContainerRef} className="h-full w-full" />
         </div>
       </div>
 
       {/* Liquidity Panel */}
-      <div className="w-full lg:w-72 border-t lg:border-t-0 lg:border-l border-white/5 p-4 flex flex-col">
-        <div className="text-xs text-white/40 uppercase tracking-wider mb-4">OTC Liquidity Depth</div>
+      <div className="flex w-full flex-col border-t border-zinc-800 p-4 lg:w-72 lg:border-l lg:border-t-0">
+        <div className="mb-4 text-xs uppercase tracking-wider text-zinc-500">OTC Liquidity</div>
         
         {/* Bid */}
         <div className="mb-4">
-          <div className="flex items-center justify-between mb-2">
+          <div className="mb-2 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <TrendingUp size={14} className="text-emerald-400" />
+              <TrendingUp className="h-4 w-4 text-emerald-400" />
               <span className="text-sm font-medium text-emerald-400">Bid Side</span>
             </div>
-            <span className="text-sm font-number font-bold text-emerald-400">{fmt(totalBidVolume)}</span>
+            <span className="text-sm font-bold text-emerald-400">{fmt(totalBidVolume)}</span>
           </div>
-          <div className="h-3 bg-white/5 rounded-full overflow-hidden">
+          <div className="h-2 overflow-hidden rounded-full bg-zinc-800">
             <div 
-              className="h-full bg-gradient-to-r from-emerald-500/30 to-emerald-500 rounded-full transition-all"
-              style={{ width: `${bidWidth}%` }}
+              className="h-full rounded-full bg-emerald-500"
+              style={{ width: `${(totalBidVolume / (totalBidVolume + totalAskVolume)) * 100}%` }}
             />
           </div>
-          <div className="mt-1 text-xs text-white/30">{buyQuotes.length} active orders</div>
+          <div className="mt-1 text-xs text-zinc-500">{buyQuotes.length} active orders</div>
         </div>
 
         {/* Ask */}
         <div className="mb-6">
-          <div className="flex items-center justify-between mb-2">
+          <div className="mb-2 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <TrendingDown size={14} className="text-rose-400" />
-              <span className="text-sm font-medium text-rose-400">Ask Side</span>
+              <TrendingDown className="h-4 w-4 text-red-400" />
+              <span className="text-sm font-medium text-red-400">Ask Side</span>
             </div>
-            <span className="text-sm font-number font-bold text-rose-400">{fmt(totalAskVolume)}</span>
+            <span className="text-sm font-bold text-red-400">{fmt(totalAskVolume)}</span>
           </div>
-          <div className="h-3 bg-white/5 rounded-full overflow-hidden">
+          <div className="h-2 overflow-hidden rounded-full bg-zinc-800">
             <div 
-              className="h-full bg-gradient-to-r from-rose-500/30 to-rose-500 rounded-full transition-all"
-              style={{ width: `${askWidth}%` }}
+              className="h-full rounded-full bg-red-500"
+              style={{ width: `${(totalAskVolume / (totalBidVolume + totalAskVolume)) * 100}%` }}
             />
           </div>
-          <div className="mt-1 text-xs text-white/30">{sellQuotes.length} active orders</div>
+          <div className="mt-1 text-xs text-zinc-500">{sellQuotes.length} active orders</div>
         </div>
 
         {/* Best Prices */}
-        <div className="glass-card rounded-xl p-4 mt-auto">
+        <div className="mt-auto rounded-xl border border-zinc-800 bg-zinc-800/50 p-4">
           <div className="grid grid-cols-3 gap-2 text-center">
             <div>
-              <div className="text-[10px] text-white/30 uppercase mb-1">Best Bid</div>
-              <div className="text-sm font-number font-bold text-emerald-400">${bestBid.toFixed(4)}</div>
+              <div className="mb-1 text-[10px] uppercase text-zinc-500">Best Bid</div>
+              <div className="text-sm font-bold text-emerald-400">${bestBid.toFixed(4)}</div>
             </div>
             <div>
-              <div className="text-[10px] text-white/30 uppercase mb-1">Spread</div>
-              <div className="text-sm font-number font-medium text-white/60">{spread.toFixed(3)}%</div>
+              <div className="mb-1 text-[10px] uppercase text-zinc-500">Spread</div>
+              <div className="text-sm font-medium text-zinc-400">{spread.toFixed(3)}%</div>
             </div>
             <div>
-              <div className="text-[10px] text-white/30 uppercase mb-1">Best Ask</div>
-              <div className="text-sm font-number font-bold text-rose-400">${bestAsk.toFixed(4)}</div>
+              <div className="mb-1 text-[10px] uppercase text-zinc-500">Best Ask</div>
+              <div className="text-sm font-bold text-red-400">${bestAsk.toFixed(4)}</div>
             </div>
           </div>
         </div>
