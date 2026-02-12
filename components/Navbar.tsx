@@ -18,8 +18,10 @@ import {
 
 const navLinks = [
   { href: '/', label: 'OTC Trading', icon: LayoutDashboard },
-  { href: '/register', label: 'Post Order', icon: FileText },
-  { href: '/kyb', label: 'KYB', icon: Shield },
+  { href: '/agent', label: 'AI Agent', icon: LineChart },
+  { href: '/reputation', label: 'Reputation', icon: Shield },
+  { href: '/escrow', label: 'Escrow', icon: Shield },
+  { href: '/trade', label: 'Trade Flow', icon: FileText },
 ]
 
 export default function Navbar() {
