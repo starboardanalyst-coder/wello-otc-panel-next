@@ -323,7 +323,7 @@ export default function TradePage() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-[hsl(215,20%,65%)]">平均交易时间</span>
-                  <span className="text-sm font-bold">< 30分钟</span>
+                  <span className="text-sm font-bold">&lt; 30分钟</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-[hsl(215,20%,65%)]">成功率</span>

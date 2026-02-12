@@ -325,7 +325,7 @@ export default function EscrowPage() {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-[hsl(215,20%,65%)]">平均结算时间</span>
-                  <span className="text-sm font-bold">< 2小时</span>
+                  <span className="text-sm font-bold">&lt; 2小时</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-[hsl(215,20%,65%)]">累计托管</span>
