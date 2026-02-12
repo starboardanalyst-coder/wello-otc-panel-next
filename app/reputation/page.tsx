@@ -11,7 +11,7 @@ import {
 const mockUserReputation = {
   score: 87,
   level: 'trusted',
-  levelName: '信任',
+  levelName: 'Trusted',
   totalTrades: 156,
   completionRate: 99.4,
   avgResponseTime: '< 25 min',
@@ -21,24 +21,24 @@ const mockUserReputation = {
 }
 
 const reputationLevels = [
-  { name: '新手', range: '0-50', color: 'zinc', limit: '$5K', features: ['交易需对手方确认', '基础功能'] },
-  { name: '常客', range: '50-80', color: 'blue', limit: '$50K', features: ['可发布广告', '正常交易'] },
-  { name: '信任', range: '80-95', color: 'emerald', limit: '$500K', features: ['优先匹配', '高级分析'] },
-  { name: '精英', range: '95-100', color: 'amber', limit: '无限', features: ['做市商认证', '费率折扣', 'API接入'] },
+  { name: 'Newcomer', range: '0-50', color: 'zinc', limit: '$5K', features: ['Requires counterparty approval', 'Basic features'] },
+  { name: 'Regular', range: '50-80', color: 'blue', limit: '$50K', features: ['Can post ads', 'Normal trading'] },
+  { name: 'Trusted', range: '80-95', color: 'emerald', limit: '$500K', features: ['Priority matching', 'Advanced analytics'] },
+  { name: 'Elite', range: '95-100', color: 'amber', limit: 'Unlimited', features: ['Market maker certified', 'Fee discounts', 'API access'] },
 ]
 
 const scoreBreakdown = [
-  { name: '完成率', weight: 30, score: 29.8, icon: CheckCircle2, color: 'emerald' },
-  { name: '响应速度', weight: 20, score: 18.5, icon: Clock, color: 'cyan' },
-  { name: '纠纷率', weight: 30, score: 28.2, icon: AlertTriangle, color: 'amber' },
-  { name: '交易量', weight: 20, score: 10.5, icon: BarChart3, color: 'purple' },
+  { name: 'Completion Rate', weight: 30, score: 29.8, icon: CheckCircle2, color: 'emerald' },
+  { name: 'Response Speed', weight: 20, score: 18.5, icon: Clock, color: 'cyan' },
+  { name: 'Dispute Rate', weight: 30, score: 28.2, icon: AlertTriangle, color: 'amber' },
+  { name: 'Trade Volume', weight: 20, score: 10.5, icon: BarChart3, color: 'purple' },
 ]
 
 const recentActivity = [
-  { type: 'trade', desc: '完成 $25,000 USDT 交易', score: '+0.2', time: '2小时前' },
-  { type: 'trade', desc: '完成 $50,000 USDT 交易', score: '+0.3', time: '1天前' },
-  { type: 'fast', desc: '快速响应奖励', score: '+0.1', time: '2天前' },
-  { type: 'trade', desc: '完成 $10,000 USDT 交易', score: '+0.1', time: '3天前' },
+  { type: 'trade', desc: 'Completed $25,000 USDT trade', score: '+0.2', time: '2 hours ago' },
+  { type: 'trade', desc: 'Completed $50,000 USDT trade', score: '+0.3', time: '1 day ago' },
+  { type: 'fast', desc: 'Fast response bonus', score: '+0.1', time: '2 days ago' },
+  { type: 'trade', desc: 'Completed $10,000 USDT trade', score: '+0.1', time: '3 days ago' },
 ]
 
 export default function ReputationPage() {
@@ -46,10 +46,10 @@ export default function ReputationPage() {
   
   const getLevelIcon = (level: string) => {
     switch(level) {
-      case '新手': return Users
-      case '常客': return Medal
-      case '信任': return Award
-      case '精英': return Crown
+      case 'Newcomer': return Users
+      case 'Regular': return Medal
+      case 'Trusted': return Award
+      case 'Elite': return Crown
       default: return Star
     }
   }
@@ -64,13 +64,13 @@ export default function ReputationPage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold sm:text-3xl">
-              <span className="gradient-text">信誉系统</span>
+              <span className="gradient-text">Reputation System</span>
             </h1>
-            <p className="text-sm text-[hsl(215,20%,65%)]">透明可验证的链上声誉</p>
+            <p className="text-sm text-[hsl(215,20%,65%)]">Transparent on-chain verifiable reputation</p>
           </div>
         </div>
         <p className="mt-2 text-[hsl(215,20%,65%)]">
-          基于完成率、响应速度、纠纷率、交易量四个维度，实时计算您的信誉评分
+          Real-time reputation score calculated from four dimensions: completion rate, response speed, dispute rate, and trade volume
         </p>
       </div>
 
@@ -107,23 +107,23 @@ export default function ReputationPage() {
                 <div className="flex-1 text-center sm:text-left">
                   <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
                     <Award className="h-5 w-5 text-emerald-400" />
-                    <span className="text-xl font-bold">{mockUserReputation.levelName}级交易者</span>
+                    <span className="text-xl font-bold">{mockUserReputation.levelName} Trader</span>
                   </div>
                   <div className="grid grid-cols-2 gap-4 mt-4">
                     <div>
-                      <div className="text-xs text-[hsl(215,20%,65%)]">总交易次数</div>
+                      <div className="text-xs text-[hsl(215,20%,65%)]">Total Trades</div>
                       <div className="font-bold">{mockUserReputation.totalTrades}</div>
                     </div>
                     <div>
-                      <div className="text-xs text-[hsl(215,20%,65%)]">总交易量</div>
+                      <div className="text-xs text-[hsl(215,20%,65%)]">Total Volume</div>
                       <div className="font-bold">{mockUserReputation.totalVolume}</div>
                     </div>
                     <div>
-                      <div className="text-xs text-[hsl(215,20%,65%)]">完成率</div>
+                      <div className="text-xs text-[hsl(215,20%,65%)]">Completion Rate</div>
                       <div className="font-bold text-emerald-400">{mockUserReputation.completionRate}%</div>
                     </div>
                     <div>
-                      <div className="text-xs text-[hsl(215,20%,65%)]">加入时间</div>
+                      <div className="text-xs text-[hsl(215,20%,65%)]">Member Since</div>
                       <div className="font-bold">{mockUserReputation.memberSince}</div>
                     </div>
                   </div>
@@ -136,7 +136,7 @@ export default function ReputationPage() {
           <div className="card">
             <div className="card-header flex items-center gap-2">
               <BarChart3 className="h-4 w-4 text-purple-400" />
-              <span className="font-semibold">评分维度</span>
+              <span className="font-semibold">Score Breakdown</span>
             </div>
             <div className="p-5 space-y-4">
               {scoreBreakdown.map((item) => (
@@ -148,7 +148,7 @@ export default function ReputationPage() {
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-sm">{item.name}</span>
                       <span className="text-xs text-[hsl(215,20%,65%)]">
-                        {item.score.toFixed(1)} / {item.weight} (权重 {item.weight}%)
+                        {item.score.toFixed(1)} / {item.weight} (Weight {item.weight}%)
                       </span>
                     </div>
                     <div className="h-2 rounded-full bg-[hsl(217,33%,17%)]">
@@ -167,7 +167,7 @@ export default function ReputationPage() {
           <div className="card">
             <div className="card-header flex items-center gap-2">
               <Crown className="h-4 w-4 text-amber-400" />
-              <span className="font-semibold">等级体系</span>
+              <span className="font-semibold">Level System</span>
             </div>
             <div className="p-5">
               <div className="grid gap-3 sm:grid-cols-2">
@@ -203,17 +203,17 @@ export default function ReputationPage() {
                             {level.name}
                             {isCurrentLevel && (
                               <span className="px-1.5 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400">
-                                当前
+                                Current
                               </span>
                             )}
                           </div>
-                          <div className="text-xs text-[hsl(215,20%,65%)]">{level.range}分</div>
+                          <div className="text-xs text-[hsl(215,20%,65%)]">{level.range} points</div>
                         </div>
                       </div>
                       
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between text-xs">
-                          <span className="text-[hsl(215,20%,65%)]">交易限额</span>
+                          <span className="text-[hsl(215,20%,65%)]">Trade Limit</span>
                           <span className="font-medium">{level.limit}</span>
                         </div>
                         <div className="text-xs text-[hsl(215,20%,65%)]">
@@ -237,10 +237,10 @@ export default function ReputationPage() {
           {/* Current Status */}
           <div className="card glow-green bg-gradient-to-br from-emerald-500/10 to-transparent">
             <div className="card-content">
-              <div className="text-xs text-[hsl(215,20%,65%)] mb-1">当前交易限额</div>
+              <div className="text-xs text-[hsl(215,20%,65%)] mb-1">Current Trade Limit</div>
               <div className="text-2xl font-bold">$500,000</div>
               <div className="mt-2 text-xs text-emerald-400">
-                距离精英级还需 8 分
+                8 more points to reach Elite
               </div>
               <div className="mt-3 h-2 rounded-full bg-[hsl(217,33%,17%)]">
                 <div className="h-full rounded-full bg-emerald-500" style={{ width: '87%' }} />
@@ -252,7 +252,7 @@ export default function ReputationPage() {
           <div className="card">
             <div className="card-header flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-cyan-400" />
-              <span className="font-semibold">近期变动</span>
+              <span className="font-semibold">Recent Activity</span>
             </div>
             <div className="p-5 space-y-3">
               {recentActivity.map((activity, i) => (
@@ -271,18 +271,18 @@ export default function ReputationPage() {
           <div className="card">
             <div className="card-header flex items-center gap-2">
               <Shield className="h-4 w-4 text-amber-400" />
-              <span className="font-semibold">信任徽章</span>
+              <span className="font-semibold">Trust Badges</span>
             </div>
             <div className="p-5">
               <div className="flex flex-wrap gap-2">
                 <span className="px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-400">
-                  <CheckCircle2 className="inline h-3 w-3 mr-1" /> KYB 已验证
+                  <CheckCircle2 className="inline h-3 w-3 mr-1" /> KYB Verified
                 </span>
                 <span className="px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-xs text-cyan-400">
-                  <Zap className="inline h-3 w-3 mr-1" /> 快速响应者
+                  <Zap className="inline h-3 w-3 mr-1" /> Fast Responder
                 </span>
                 <span className="px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-xs text-purple-400">
-                  <Target className="inline h-3 w-3 mr-1" /> 100笔完成
+                  <Target className="inline h-3 w-3 mr-1" /> 100 Trades
                 </span>
               </div>
             </div>
@@ -292,10 +292,10 @@ export default function ReputationPage() {
           <div className="card">
             <div className="card-content space-y-3">
               <Link href="/agent" className="btn btn-outline w-full justify-center">
-                <Target className="h-4 w-4" /> AI 撮合 Agent
+                <Target className="h-4 w-4" /> AI Matching Agent
               </Link>
               <Link href="/escrow" className="btn btn-outline w-full justify-center">
-                <Shield className="h-4 w-4" /> 安全托管流程
+                <Shield className="h-4 w-4" /> Secure Escrow
               </Link>
             </div>
           </div>

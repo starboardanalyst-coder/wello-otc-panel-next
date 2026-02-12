@@ -13,90 +13,90 @@ type JourneyType = 'buyer' | 'seller'
 const buyerSteps = [
   { 
     step: 1, 
-    title: '连接钱包 + 完成KYC',
-    desc: '使用MetaMask或其他钱包连接，完成身份验证',
+    title: 'Connect Wallet + Complete KYC',
+    desc: 'Connect with MetaMask or other wallets, complete identity verification',
     icon: Wallet,
-    detail: '支持多种钱包，KYC通常在24小时内完成'
+    detail: 'Supports multiple wallets, KYC typically completed within 24 hours'
   },
   { 
     step: 2, 
-    title: '浏览订单簿 / AI匹配',
-    desc: '查看市场深度，或让AI推荐最优对手方',
+    title: 'Browse Order Book / AI Match',
+    desc: 'View market depth, or let AI recommend optimal counterparties',
     icon: Search,
-    detail: 'AI会根据您的偏好推荐信誉好、价格优的卖家'
+    detail: 'AI recommends reputable sellers with best prices based on your preferences'
   },
   { 
     step: 3, 
-    title: '确认USDT已锁定',
-    desc: '确认卖家的USDT已锁定在托管账户',
+    title: 'Confirm USDT Locked',
+    desc: 'Confirm seller\'s USDT is locked in escrow',
     icon: Lock,
-    detail: '资金锁定后才进行下一步，保障您的资金安全'
+    detail: 'Funds are locked before proceeding, ensuring your security'
   },
   { 
     step: 4, 
-    title: '向卖家转账法币',
-    desc: '按指示向卖家银行账户转账',
+    title: 'Transfer Fiat to Seller',
+    desc: 'Transfer fiat to seller\'s bank account as instructed',
     icon: Banknote,
-    detail: '支持银行转账、支付宝、微信等多种方式'
+    detail: 'Supports bank transfer, PayPal, and various payment methods'
   },
   { 
     step: 5, 
-    title: '等待卖家确认',
-    desc: '卖家确认收到法币',
+    title: 'Wait for Seller Confirmation',
+    desc: 'Seller confirms receipt of fiat',
     icon: Clock,
-    detail: '如超时未确认，可申请仲裁'
+    detail: 'If confirmation times out, you can request arbitration'
   },
   { 
     step: 6, 
-    title: 'USDT自动释放',
-    desc: 'USDT自动到账您的钱包',
+    title: 'USDT Auto-Released',
+    desc: 'USDT automatically deposited to your wallet',
     icon: Unlock,
-    detail: '交易完成，可对卖家进行评价'
+    detail: 'Trade complete, you can rate the seller'
   },
 ]
 
 const sellerSteps = [
   { 
     step: 1, 
-    title: '连接钱包 + KYC + 设置收款',
-    desc: '完成验证并设置收款方式',
+    title: 'Connect Wallet + KYC + Set Payment',
+    desc: 'Complete verification and set payment methods',
     icon: Wallet,
-    detail: '添加银行账户、支付宝等收款方式'
+    detail: 'Add bank accounts, PayPal, and other payment methods'
   },
   { 
     step: 2, 
-    title: '发布卖单',
-    desc: '设置价格、数量、支付方式',
+    title: 'Post Sell Order',
+    desc: 'Set price, quantity, and payment methods',
     icon: Store,
-    detail: '可设置最小/最大交易额、接受的支付方式'
+    detail: 'Set min/max trade amounts and accepted payment methods'
   },
   { 
     step: 3, 
-    title: 'USDT自动锁入托管',
-    desc: '买家下单后，USDT自动锁定',
+    title: 'USDT Auto-Locked in Escrow',
+    desc: 'When buyer orders, USDT is automatically locked',
     icon: Lock,
-    detail: '您的USDT安全锁定，防止恶意取消'
+    detail: 'Your USDT is securely locked, preventing malicious cancellations'
   },
   { 
     step: 4, 
-    title: '等待买家转账',
-    desc: '买家向您转账法币',
+    title: 'Wait for Buyer Transfer',
+    desc: 'Buyer transfers fiat to you',
     icon: Clock,
-    detail: '收到转账通知后检查账户'
+    detail: 'Check your account when you receive transfer notification'
   },
   { 
     step: 5, 
-    title: '确认收款',
-    desc: '确认法币已到账',
+    title: 'Confirm Receipt',
+    desc: 'Confirm fiat has arrived',
     icon: CheckCircle2,
-    detail: '务必确认实际到账后再确认'
+    detail: 'Only confirm after verifying actual receipt'
   },
   { 
     step: 6, 
-    title: '交易完成',
-    desc: 'USDT释放给买家，双方评价',
+    title: 'Trade Complete',
+    desc: 'USDT released to buyer, both parties rate',
     icon: Star,
-    detail: '良好的评价有助于提升您的信誉分'
+    detail: 'Good ratings help improve your reputation score'
   },
 ]
 
@@ -116,13 +116,13 @@ export default function TradePage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold sm:text-3xl">
-              <span className="gradient-text">交易旅程</span>
+              <span className="gradient-text">Trade Journey</span>
             </h1>
-            <p className="text-sm text-[hsl(215,20%,65%)]">完整的买卖流程指南</p>
+            <p className="text-sm text-[hsl(215,20%,65%)]">Complete buy/sell flow guide</p>
           </div>
         </div>
         <p className="mt-2 text-[hsl(215,20%,65%)]">
-          了解从下单到完成的每一步，安全高效地完成OTC交易
+          Understand every step from order to completion, trade OTC safely and efficiently
         </p>
       </div>
 
@@ -138,7 +138,7 @@ export default function TradePage() {
             }`}
           >
             <ShoppingCart className="h-4 w-4" />
-            买家旅程（买入USDT）
+            Buyer Journey (Buy USDT)
           </button>
           <button 
             onClick={() => { setJourneyType('seller'); setActiveStep(1); }}
@@ -149,7 +149,7 @@ export default function TradePage() {
             }`}
           >
             <Store className="h-4 w-4" />
-            卖家旅程（卖出USDT）
+            Seller Journey (Sell USDT)
           </button>
         </div>
       </div>
@@ -166,10 +166,10 @@ export default function TradePage() {
                   <Store className="h-4 w-4 text-purple-400" />
                 )}
                 <span className="font-semibold">
-                  {journeyType === 'buyer' ? '买家' : '卖家'}流程步骤
+                  {journeyType === 'buyer' ? 'Buyer' : 'Seller'} Process Steps
                 </span>
               </div>
-              <span className="badge badge-secondary">共 {steps.length} 步</span>
+              <span className="badge badge-secondary">{steps.length} Steps</span>
             </div>
             <div className="p-5">
               <div className="space-y-3">
@@ -232,7 +232,7 @@ export default function TradePage() {
                                 ? 'bg-emerald-500/20 text-emerald-400'
                                 : 'bg-purple-500/20 text-purple-400'
                             }`}>
-                              当前步骤
+                              Current Step
                             </span>
                           )}
                         </div>
@@ -252,10 +252,10 @@ export default function TradePage() {
                   className="btn btn-outline text-sm"
                   disabled={activeStep === 1}
                 >
-                  上一步
+                  Previous
                 </button>
                 <div className="text-sm text-[hsl(215,20%,65%)]">
-                  步骤 {activeStep} / {steps.length}
+                  Step {activeStep} / {steps.length}
                 </div>
                 <button 
                   onClick={() => setActiveStep(Math.min(steps.length, activeStep + 1))}
@@ -264,7 +264,7 @@ export default function TradePage() {
                   }`}
                   disabled={activeStep === steps.length}
                 >
-                  下一步 <ArrowRight className="h-3 w-3" />
+                  Next <ArrowRight className="h-3 w-3" />
                 </button>
               </div>
             </div>
@@ -280,7 +280,7 @@ export default function TradePage() {
               : 'bg-gradient-to-br from-purple-500/10 to-transparent'
           }`}>
             <div className="card-header">
-              <span className="font-semibold">步骤 {activeStep} 详情</span>
+              <span className="font-semibold">Step {activeStep} Details</span>
             </div>
             <div className="p-5">
               <div className={`flex h-16 w-16 items-center justify-center rounded-2xl mb-4 ${
@@ -303,11 +303,11 @@ export default function TradePage() {
                 <div className="flex items-start gap-2 text-xs">
                   <AlertTriangle className="h-3 w-3 text-amber-400 mt-0.5 shrink-0" />
                   <span className="text-[hsl(215,20%,65%)]">
-                    {activeStep === 4 && journeyType === 'buyer' && '转账前请仔细核对收款信息，避免转错账户'}
-                    {activeStep === 5 && journeyType === 'seller' && '请确认资金实际到账后再点击确认，避免遭受欺诈'}
-                    {activeStep !== 4 && activeStep !== 5 && '如有任何问题，请联系客服或发起仲裁'}
-                    {activeStep === 4 && journeyType === 'seller' && '请耐心等待，买家通常会在30分钟内完成转账'}
-                    {activeStep === 5 && journeyType === 'buyer' && '如卖家长时间未确认，可申请平台介入'}
+                    {activeStep === 4 && journeyType === 'buyer' && 'Double-check payment details before transferring to avoid wrong transfers'}
+                    {activeStep === 5 && journeyType === 'seller' && 'Only confirm after funds are actually received to avoid fraud'}
+                    {activeStep !== 4 && activeStep !== 5 && 'Contact support or request arbitration if any issues arise'}
+                    {activeStep === 4 && journeyType === 'seller' && 'Please be patient, buyers typically complete transfer within 30 minutes'}
+                    {activeStep === 5 && journeyType === 'buyer' && 'Request platform intervention if seller delays confirmation'}
                   </span>
                 </div>
               </div>
@@ -318,19 +318,19 @@ export default function TradePage() {
           <div className="card">
             <div className="card-content">
               <h3 className="text-xs font-semibold uppercase tracking-wider text-[hsl(215,20%,65%)] mb-4">
-                平台数据
+                Platform Data
               </h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-[hsl(215,20%,65%)]">平均交易时间</span>
-                  <span className="text-sm font-bold">&lt; 30分钟</span>
+                  <span className="text-sm text-[hsl(215,20%,65%)]">Avg Trade Time</span>
+                  <span className="text-sm font-bold">&lt; 30 min</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-[hsl(215,20%,65%)]">成功率</span>
+                  <span className="text-sm text-[hsl(215,20%,65%)]">Success Rate</span>
                   <span className="text-sm font-bold text-emerald-400">99.97%</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-[hsl(215,20%,65%)]">活跃交易者</span>
+                  <span className="text-sm text-[hsl(215,20%,65%)]">Active Traders</span>
                   <span className="text-sm font-bold">156</span>
                 </div>
               </div>
@@ -341,13 +341,13 @@ export default function TradePage() {
           <div className="card">
             <div className="card-content space-y-3">
               <Link href="/agent" className="btn btn-outline w-full justify-center">
-                <Zap className="h-4 w-4" /> AI 撮合 Agent
+                <Zap className="h-4 w-4" /> AI Matching Agent
               </Link>
               <Link href="/escrow" className="btn btn-outline w-full justify-center">
-                <Shield className="h-4 w-4" /> 安全托管详解
+                <Shield className="h-4 w-4" /> Escrow Details
               </Link>
               <Link href="/reputation" className="btn btn-outline w-full justify-center">
-                <Star className="h-4 w-4" /> 信誉系统
+                <Star className="h-4 w-4" /> Reputation System
               </Link>
             </div>
           </div>

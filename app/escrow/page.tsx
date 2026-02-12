@@ -11,43 +11,43 @@ import {
 // Mock escrow transaction
 const mockTransaction = {
   id: 'ESC-2026-0212-001',
-  status: 'locked', // pending, locked, confirming, released, disputed
+  status: 'locked',
   amount: '50,000 USDT',
   fiatAmount: '$50,250 USD',
   buyer: 'Enterprise Corp',
   seller: 'MegaFund Capital',
   createdAt: '2026-02-12 18:30',
-  lockTime: '1小时前',
-  timeLimit: '24小时',
-  timeRemaining: '22小时 45分',
+  lockTime: '1 hour ago',
+  timeLimit: '24 hours',
+  timeRemaining: '22h 45m',
 }
 
 const escrowSteps = [
   { 
     step: 1, 
-    title: '卖方锁定', 
-    desc: '卖方将USDT存入托管账户',
+    title: 'Seller Locks', 
+    desc: 'Seller deposits USDT into escrow account',
     icon: Lock,
     status: 'completed'
   },
   { 
     step: 2, 
-    title: '买方付款', 
-    desc: '买方向卖方转账法币',
+    title: 'Buyer Pays', 
+    desc: 'Buyer transfers fiat to seller',
     icon: Banknote,
     status: 'active'
   },
   { 
     step: 3, 
-    title: '卖方确认', 
-    desc: '卖方确认收到法币',
+    title: 'Seller Confirms', 
+    desc: 'Seller confirms fiat receipt',
     icon: CheckCircle2,
     status: 'pending'
   },
   { 
     step: 4, 
-    title: '自动释放', 
-    desc: 'USDT自动释放给买方',
+    title: 'Auto Release', 
+    desc: 'USDT automatically released to buyer',
     icon: Unlock,
     status: 'pending'
   },
@@ -55,20 +55,20 @@ const escrowSteps = [
 
 const escrowFeatures = [
   { 
-    title: '时间锁保护', 
-    desc: '超时自动退回卖方，防止买方消失',
+    title: 'Time-Lock Protection', 
+    desc: 'Auto-refund to seller on timeout, preventing buyer disappearance',
     icon: Timer,
     color: 'cyan'
   },
   { 
-    title: '仲裁机制', 
-    desc: '争议时由社区仲裁员投票裁决',
+    title: 'Arbitration System', 
+    desc: 'Community arbitrators vote to resolve disputes',
     icon: Scale,
     color: 'amber'
   },
   { 
-    title: '链上可验证', 
-    desc: '所有交易记录公开透明可查',
+    title: 'On-Chain Verifiable', 
+    desc: 'All transactions publicly transparent and auditable',
     icon: FileCheck,
     color: 'emerald'
   },
@@ -93,13 +93,13 @@ export default function EscrowPage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold sm:text-3xl">
-              <span className="gradient-text">安全托管</span>
+              <span className="gradient-text">Secure Escrow</span>
             </h1>
-            <p className="text-sm text-[hsl(215,20%,65%)]">消除对手方信任问题</p>
+            <p className="text-sm text-[hsl(215,20%,65%)]">Eliminate counterparty trust issues</p>
           </div>
         </div>
         <p className="mt-2 text-[hsl(215,20%,65%)]">
-          资金锁定在托管账户，买方确认收款后才释放，原子交换消除一方跑路风险
+          Funds locked in escrow, released only after buyer confirms receipt — atomic swaps eliminate runaway risk
         </p>
       </div>
 
@@ -111,26 +111,26 @@ export default function EscrowPage() {
             <div className="card-header flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Lock className="h-4 w-4 text-cyan-400" />
-                <span className="font-semibold">当前托管交易</span>
+                <span className="font-semibold">Current Escrow Transaction</span>
               </div>
               <span className="badge badge-default">{mockTransaction.id}</span>
             </div>
             <div className="p-5">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
                 <div>
-                  <div className="text-xs text-[hsl(215,20%,65%)]">托管金额</div>
+                  <div className="text-xs text-[hsl(215,20%,65%)]">Escrow Amount</div>
                   <div className="font-bold text-lg text-cyan-400">{mockTransaction.amount}</div>
                 </div>
                 <div>
-                  <div className="text-xs text-[hsl(215,20%,65%)]">法币金额</div>
+                  <div className="text-xs text-[hsl(215,20%,65%)]">Fiat Amount</div>
                   <div className="font-bold text-lg">{mockTransaction.fiatAmount}</div>
                 </div>
                 <div>
-                  <div className="text-xs text-[hsl(215,20%,65%)]">锁定时间</div>
+                  <div className="text-xs text-[hsl(215,20%,65%)]">Lock Time</div>
                   <div className="font-bold">{mockTransaction.lockTime}</div>
                 </div>
                 <div>
-                  <div className="text-xs text-[hsl(215,20%,65%)]">剩余时间</div>
+                  <div className="text-xs text-[hsl(215,20%,65%)]">Time Remaining</div>
                   <div className="font-bold text-amber-400">{mockTransaction.timeRemaining}</div>
                 </div>
               </div>
@@ -142,14 +142,14 @@ export default function EscrowPage() {
                     <Building2 className="h-5 w-5 text-emerald-400" />
                   </div>
                   <div>
-                    <div className="text-xs text-[hsl(215,20%,65%)]">买方</div>
+                    <div className="text-xs text-[hsl(215,20%,65%)]">Buyer</div>
                     <div className="font-medium">{mockTransaction.buyer}</div>
                   </div>
                 </div>
                 <ArrowRight className="h-5 w-5 text-[hsl(215,20%,65%)]" />
                 <div className="flex items-center gap-3">
                   <div>
-                    <div className="text-xs text-[hsl(215,20%,65%)] text-right">卖方</div>
+                    <div className="text-xs text-[hsl(215,20%,65%)] text-right">Seller</div>
                     <div className="font-medium">{mockTransaction.seller}</div>
                   </div>
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/20">
@@ -164,7 +164,7 @@ export default function EscrowPage() {
           <div className="card">
             <div className="card-header flex items-center gap-2">
               <FileCheck className="h-4 w-4 text-emerald-400" />
-              <span className="font-semibold">托管流程</span>
+              <span className="font-semibold">Escrow Process</span>
             </div>
             <div className="p-5">
               <div className="space-y-4">
@@ -207,11 +207,11 @@ export default function EscrowPage() {
                               status === 'active' ? 'text-cyan-400' : 
                               status === 'completed' ? 'text-emerald-400' : ''
                             }`}>
-                              步骤 {step.step}: {step.title}
+                              Step {step.step}: {step.title}
                             </span>
                             {status === 'active' && (
                               <span className="px-2 py-0.5 rounded-full bg-cyan-500/20 text-[10px] text-cyan-400 animate-pulse">
-                                进行中
+                                In Progress
                               </span>
                             )}
                           </div>
@@ -232,14 +232,14 @@ export default function EscrowPage() {
                   className="btn btn-outline text-sm"
                   disabled={currentStep === 1}
                 >
-                  上一步
+                  Previous
                 </button>
                 <button 
                   onClick={() => setCurrentStep(Math.min(4, currentStep + 1))}
                   className="btn btn-primary text-sm"
                   disabled={currentStep === 4}
                 >
-                  模拟下一步 <ArrowRight className="h-3 w-3" />
+                  Simulate Next <ArrowRight className="h-3 w-3" />
                 </button>
               </div>
             </div>
@@ -252,7 +252,7 @@ export default function EscrowPage() {
           <div className="card">
             <div className="card-header flex items-center gap-2">
               <Shield className="h-4 w-4 text-amber-400" />
-              <span className="font-semibold">托管特性</span>
+              <span className="font-semibold">Escrow Features</span>
             </div>
             <div className="p-5 space-y-4">
               {escrowFeatures.map((feature) => (
@@ -281,28 +281,28 @@ export default function EscrowPage() {
           <div className="card">
             <div className="card-header flex items-center gap-2">
               <Scale className="h-4 w-4 text-amber-400" />
-              <span className="font-semibold">争议处理</span>
+              <span className="font-semibold">Dispute Resolution</span>
             </div>
             <div className="p-5">
               <p className="text-xs text-[hsl(215,20%,65%)] mb-4">
-                如果交易产生争议，将进入仲裁流程：
+                If a dispute arises, the arbitration process begins:
               </p>
               <div className="space-y-3 text-sm">
                 <div className="flex items-start gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[hsl(217,33%,17%)] text-[10px]">1</span>
-                  <span className="text-[hsl(215,20%,65%)]">任一方发起争议申请</span>
+                  <span className="text-[hsl(215,20%,65%)]">Either party initiates dispute</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[hsl(217,33%,17%)] text-[10px]">2</span>
-                  <span className="text-[hsl(215,20%,65%)]">双方提交证据（截图、记录）</span>
+                  <span className="text-[hsl(215,20%,65%)]">Both parties submit evidence (screenshots, records)</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[hsl(217,33%,17%)] text-[10px]">3</span>
-                  <span className="text-[hsl(215,20%,65%)]">3-5名仲裁员投票裁决</span>
+                  <span className="text-[hsl(215,20%,65%)]">3-5 arbitrators vote on resolution</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[hsl(217,33%,17%)] text-[10px]">4</span>
-                  <span className="text-[hsl(215,20%,65%)]">败诉方承担2%仲裁费</span>
+                  <span className="text-[hsl(215,20%,65%)]">Losing party pays 2% arbitration fee</span>
                 </div>
               </div>
             </div>
@@ -312,23 +312,23 @@ export default function EscrowPage() {
           <div className="card">
             <div className="card-content">
               <h3 className="text-xs font-semibold uppercase tracking-wider text-[hsl(215,20%,65%)] mb-4">
-                平台安全数据
+                Platform Safety Data
               </h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-[hsl(215,20%,65%)]">托管成功率</span>
+                  <span className="text-sm text-[hsl(215,20%,65%)]">Escrow Success Rate</span>
                   <span className="text-sm font-bold text-emerald-400">99.97%</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-[hsl(215,20%,65%)]">争议率</span>
+                  <span className="text-sm text-[hsl(215,20%,65%)]">Dispute Rate</span>
                   <span className="text-sm font-bold">0.03%</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-[hsl(215,20%,65%)]">平均结算时间</span>
-                  <span className="text-sm font-bold">&lt; 2小时</span>
+                  <span className="text-sm text-[hsl(215,20%,65%)]">Avg Settlement Time</span>
+                  <span className="text-sm font-bold">&lt; 2 hours</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-[hsl(215,20%,65%)]">累计托管</span>
+                  <span className="text-sm text-[hsl(215,20%,65%)]">Total Escrowed</span>
                   <span className="text-sm font-bold">$128M</span>
                 </div>
               </div>
@@ -339,10 +339,10 @@ export default function EscrowPage() {
           <div className="card">
             <div className="card-content space-y-3">
               <Link href="/trade" className="btn btn-primary w-full justify-center">
-                <ArrowRight className="h-4 w-4" /> 查看完整交易流程
+                <ArrowRight className="h-4 w-4" /> View Full Trade Flow
               </Link>
               <Link href="/reputation" className="btn btn-outline w-full justify-center">
-                <Users className="h-4 w-4" /> 信誉系统
+                <Users className="h-4 w-4" /> Reputation System
               </Link>
             </div>
           </div>

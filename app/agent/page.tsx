@@ -19,7 +19,7 @@ const mockCounterparties = [
     avgResponse: '< 1 hour',
     volume: '$2.5M',
     match: 98,
-    reason: '历史交易记录优秀，响应速度快，符合您的大额交易偏好'
+    reason: 'Excellent trade history, fast response, matches your large trade preferences'
   },
   { 
     id: 2, 
@@ -30,7 +30,7 @@ const mockCounterparties = [
     avgResponse: '< 30 min',
     volume: '$1.8M',
     match: 92,
-    reason: '响应速度最快，适合时间敏感型交易'
+    reason: 'Fastest response time, ideal for time-sensitive trades'
   },
   { 
     id: 3, 
@@ -41,7 +41,7 @@ const mockCounterparties = [
     avgResponse: '< 20 min',
     volume: '$800K',
     match: 85,
-    reason: '中等交易量，价格有一定议价空间'
+    reason: 'Medium volume, some room for price negotiation'
   },
 ]
 
@@ -61,8 +61,8 @@ const mockPricingSuggestion = {
 }
 
 const mockRiskAlerts = [
-  { id: 1, type: 'info', message: '市场流动性良好，建议现在交易', time: '刚刚' },
-  { id: 2, type: 'warning', message: '对手方 CryptoDealer 响应时间延长，建议谨慎', time: '5分钟前' },
+  { id: 1, type: 'info', message: 'Market liquidity is good, recommended to trade now', time: 'Just now' },
+  { id: 2, type: 'warning', message: 'Counterparty CryptoDealer response time delayed, proceed with caution', time: '5 min ago' },
 ]
 
 export default function AgentPage() {
@@ -79,19 +79,19 @@ export default function AgentPage() {
           </div>
           <div>
             <h1 className="text-2xl font-bold sm:text-3xl">
-              AI <span className="gradient-text">撮合 Agent</span>
+              AI <span className="gradient-text">Matching Agent</span>
             </h1>
-            <p className="text-sm text-[hsl(215,20%,65%)]">智能匹配最优交易对手</p>
+            <p className="text-sm text-[hsl(215,20%,65%)]">Intelligently match optimal counterparties</p>
           </div>
         </div>
         <p className="mt-2 text-[hsl(215,20%,65%)]">
-          Agent 不只是匹配工具，而是您的「交易顾问」——评估对手方、学习偏好、建议定价、预警风险
+          The Agent is more than a matching tool — it&apos;s your trading advisor: evaluating counterparties, learning preferences, suggesting pricing, and alerting risks
         </p>
       </div>
 
       {/* Agent Mode Toggle */}
       <div className="mb-6 flex items-center gap-4">
-        <span className="text-sm text-[hsl(215,20%,65%)]">Agent 模式:</span>
+        <span className="text-sm text-[hsl(215,20%,65%)]">Agent Mode:</span>
         <div className="flex rounded-lg border border-[hsl(217,33%,17%)] p-1">
           <button 
             onClick={() => setAgentMode('auto')}
@@ -101,7 +101,7 @@ export default function AgentPage() {
                 : 'text-[hsl(215,20%,65%)] hover:text-white'
             }`}
           >
-            <Sparkles className="inline h-3 w-3 mr-1" /> 自动匹配
+            <Sparkles className="inline h-3 w-3 mr-1" /> Auto Match
           </button>
           <button 
             onClick={() => setAgentMode('manual')}
@@ -111,7 +111,7 @@ export default function AgentPage() {
                 : 'text-[hsl(215,20%,65%)] hover:text-white'
             }`}
           >
-            <Settings className="inline h-3 w-3 mr-1" /> 手动选择
+            <Settings className="inline h-3 w-3 mr-1" /> Manual Select
           </button>
         </div>
       </div>
@@ -119,18 +119,18 @@ export default function AgentPage() {
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Left Column - Counterparty Evaluation */}
         <div className="lg:col-span-2 space-y-6">
-          {/* 3.3.1 对手方评估 */}
+          {/* Counterparty Evaluation */}
           <div className="card">
             <div className="card-header flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Target className="h-4 w-4 text-emerald-400" />
-                <span className="font-semibold">对手方评估</span>
+                <span className="font-semibold">Counterparty Evaluation</span>
               </div>
-              <span className="badge badge-secondary">AI 推荐</span>
+              <span className="badge badge-secondary">AI Recommended</span>
             </div>
             <div className="p-5 space-y-4">
               <p className="text-xs text-[hsl(215,20%,65%)] mb-4">
-                基于历史交易记录、链上行为、响应速度、纠纷率等多维度分析
+                Multi-dimensional analysis based on trade history, on-chain behavior, response speed, and dispute rate
               </p>
               
               {mockCounterparties.map((cp) => (
@@ -154,68 +154,68 @@ export default function AgentPage() {
                           <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${
                             cp.risk === 'low' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'
                           }`}>
-                            {cp.risk === 'low' ? '低风险' : '中风险'}
+                            {cp.risk === 'low' ? 'Low Risk' : 'Medium Risk'}
                           </span>
-                          <span>信誉: {cp.score}分</span>
+                          <span>Score: {cp.score}</span>
                         </div>
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="text-2xl font-bold text-emerald-400">{cp.match}%</div>
-                      <div className="text-[10px] text-[hsl(215,20%,65%)]">匹配度</div>
+                      <div className="text-[10px] text-[hsl(215,20%,65%)]">Match</div>
                     </div>
                   </div>
                   
                   <div className="grid grid-cols-3 gap-4 text-center text-xs mb-3">
                     <div>
-                      <div className="text-[hsl(215,20%,65%)]">完成率</div>
+                      <div className="text-[hsl(215,20%,65%)]">Completion</div>
                       <div className="font-medium text-emerald-400">{cp.completionRate}%</div>
                     </div>
                     <div>
-                      <div className="text-[hsl(215,20%,65%)]">响应</div>
+                      <div className="text-[hsl(215,20%,65%)]">Response</div>
                       <div className="font-medium">{cp.avgResponse}</div>
                     </div>
                     <div>
-                      <div className="text-[hsl(215,20%,65%)]">交易量</div>
+                      <div className="text-[hsl(215,20%,65%)]">Volume</div>
                       <div className="font-medium">{cp.volume}</div>
                     </div>
                   </div>
 
                   <div className="rounded-lg bg-[hsl(217,33%,17%,0.5)] p-2 text-xs text-[hsl(215,20%,65%)]">
                     <Brain className="inline h-3 w-3 mr-1 text-purple-400" />
-                    AI 分析: {cp.reason}
+                    AI Analysis: {cp.reason}
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* 3.3.3 动态定价建议 */}
+          {/* Dynamic Pricing Suggestions */}
           <div className="card">
             <div className="card-header flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-cyan-400" />
-              <span className="font-semibold">动态定价建议</span>
+              <span className="font-semibold">Dynamic Pricing Suggestions</span>
             </div>
             <div className="p-5">
               <p className="text-xs text-[hsl(215,20%,65%)] mb-4">
-                基于当前市场深度、时间段流动性、对手方质量实时计算
+                Real-time calculations based on current market depth, time-based liquidity, and counterparty quality
               </p>
               
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
                 <div className="rounded-lg bg-[hsl(217,33%,17%)] p-3 text-center">
-                  <div className="text-[10px] text-[hsl(215,20%,65%)] mb-1">市场中间价</div>
+                  <div className="text-[10px] text-[hsl(215,20%,65%)] mb-1">Market Mid</div>
                   <div className="text-lg font-bold">${mockPricingSuggestion.marketMid.toFixed(4)}</div>
                 </div>
                 <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/30 p-3 text-center">
-                  <div className="text-[10px] text-emerald-400 mb-1">建议买入价</div>
+                  <div className="text-[10px] text-emerald-400 mb-1">Suggested Bid</div>
                   <div className="text-lg font-bold text-emerald-400">${mockPricingSuggestion.suggestedBid.toFixed(4)}</div>
                 </div>
                 <div className="rounded-lg bg-red-500/10 border border-red-500/30 p-3 text-center">
-                  <div className="text-[10px] text-red-400 mb-1">建议卖出价</div>
+                  <div className="text-[10px] text-red-400 mb-1">Suggested Ask</div>
                   <div className="text-lg font-bold text-red-400">${mockPricingSuggestion.suggestedAsk.toFixed(4)}</div>
                 </div>
                 <div className="rounded-lg bg-[hsl(217,33%,17%)] p-3 text-center">
-                  <div className="text-[10px] text-[hsl(215,20%,65%)] mb-1">预期成交</div>
+                  <div className="text-[10px] text-[hsl(215,20%,65%)] mb-1">Expected Fill</div>
                   <div className="text-lg font-bold">{mockPricingSuggestion.expectedFillTime}</div>
                 </div>
               </div>
@@ -223,7 +223,7 @@ export default function AgentPage() {
               <div className="flex items-center justify-between rounded-lg bg-purple-500/10 border border-purple-500/30 p-3">
                 <div className="flex items-center gap-2">
                   <Brain className="h-4 w-4 text-purple-400" />
-                  <span className="text-sm">AI 置信度</span>
+                  <span className="text-sm">AI Confidence</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-32 rounded-full bg-[hsl(217,33%,17%)]">
@@ -241,34 +241,34 @@ export default function AgentPage() {
 
         {/* Right Column */}
         <div className="space-y-6">
-          {/* 3.3.2 偏好学习 */}
+          {/* Your Preferences */}
           <div className="card">
             <div className="card-header flex items-center gap-2">
               <User className="h-4 w-4 text-amber-400" />
-              <span className="font-semibold">您的偏好</span>
+              <span className="font-semibold">Your Preferences</span>
             </div>
             <div className="p-5 space-y-4">
               <p className="text-xs text-[hsl(215,20%,65%)]">
-                Agent 会学习您的交易习惯，提供个性化推荐
+                The Agent learns your trading habits to provide personalized recommendations
               </p>
               
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-[hsl(215,20%,65%)]">风险偏好</span>
-                  <span className="badge badge-default">保守型</span>
+                  <span className="text-sm text-[hsl(215,20%,65%)]">Risk Tolerance</span>
+                  <span className="badge badge-default">Conservative</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-[hsl(215,20%,65%)]">速度优先</span>
+                  <span className="text-sm text-[hsl(215,20%,65%)]">Speed Priority</span>
                   <CheckCircle2 className="h-4 w-4 text-emerald-400" />
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-[hsl(215,20%,65%)]">常用额度</span>
+                  <span className="text-sm text-[hsl(215,20%,65%)]">Preferred Volume</span>
                   <span className="text-sm font-medium">{mockPreferences.preferredVolume}</span>
                 </div>
               </div>
 
               <div className="border-t border-[hsl(217,33%,17%)] pt-3">
-                <div className="text-xs text-[hsl(215,20%,65%)] mb-2">常用交易对手</div>
+                <div className="text-xs text-[hsl(215,20%,65%)] mb-2">Favorite Counterparties</div>
                 <div className="flex flex-wrap gap-2">
                   {mockPreferences.favoriteTraders.map((t) => (
                     <span key={t} className="px-2 py-1 rounded-full bg-emerald-500/10 text-xs text-emerald-400">
@@ -280,11 +280,11 @@ export default function AgentPage() {
             </div>
           </div>
 
-          {/* 3.3.4 风险预警 */}
+          {/* Real-time Alerts */}
           <div className="card">
             <div className="card-header flex items-center gap-2">
               <AlertTriangle className="h-4 w-4 text-amber-400" />
-              <span className="font-semibold">实时预警</span>
+              <span className="font-semibold">Real-time Alerts</span>
             </div>
             <div className="p-5 space-y-3">
               {mockRiskAlerts.map((alert) => (
@@ -318,10 +318,10 @@ export default function AgentPage() {
           <div className="card">
             <div className="card-content space-y-3">
               <button className="btn btn-primary w-full justify-center">
-                <Zap className="h-4 w-4" /> 一键匹配交易
+                <Zap className="h-4 w-4" /> One-Click Match
               </button>
               <Link href="/trade" className="btn btn-outline w-full justify-center">
-                查看交易流程 <ArrowRight className="h-4 w-4" />
+                View Trade Flow <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
